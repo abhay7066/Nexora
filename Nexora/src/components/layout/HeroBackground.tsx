@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import gifUrl from "@/assets/BKV2.gif";
+import videoUrl from "@/assets/final_flacon_here_secrion_vido.mp4";
 
 interface HeroBackgroundProps {
   opacity?: number;
@@ -107,11 +107,14 @@ export function HeroBackground({
       className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none"
       style={{ opacity }}
     >
-      {/* 1. Base solid background and custom GIF layer */}
+      {/* 1. Base solid background and custom video layer */}
       <div className="absolute inset-0 bg-background transition-colors duration-500">
-        <img 
-          src={gifUrl} 
-          alt="" 
+        <video 
+          src={videoUrl} 
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover object-center opacity-70 select-none pointer-events-none" 
         />
         {/* Premium multi-stage overlay: heavy mask on mobile, smooth fade on desktop */}
