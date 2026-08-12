@@ -68,12 +68,12 @@ export function Hero() {
             className="mt-16 grid w-full grid-cols-2 gap-6 border-t border-border pt-10 sm:grid-cols-4"
           >
             {[
-              ["120+", "Businesses scaled"],
-              ["₹400Cr+", "Revenue influenced"],
-              ["7", "Practice areas"],
-              ["9.6/10", "Client NPS"],
+              ["100%", "Founder-Led Execution"],
+              ["2–4 Wks", "Average Launch Speed"],
+              ["1 System", "Brand, Code & AI"],
+              ["0", "Agency Overhead Layers"],
             ].map(([metric, label]) => (
-              <div key={label} className="flex flex-col items-center gap-1">
+              <div key={label} className="flex flex-col items-center gap-1 text-center">
                 <div className="font-display text-2xl text-foreground sm:text-3xl">{metric}</div>
                 <div className="text-xs uppercase tracking-widest text-muted-foreground">
                   {label}

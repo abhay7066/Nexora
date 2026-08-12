@@ -52,10 +52,10 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { value: "12+", label: "years", detail: "of operating experience across the founding team" },
-  { value: "80+", label: "engagements", detail: "shipped across startups, SMEs and enterprise" },
-  { value: "4.2×", label: "avg. ROI", detail: "measured on committed growth programs" },
-  { value: "97%", label: "retention", detail: "of clients renew or expand within 12 months" },
+  { value: "100%", label: "Direct Founder Access", detail: "You work directly with senior builders, zero account manager pass-offs" },
+  { value: "< 24h", label: "Response SLA", detail: "Embedded in your daily Slack, standups, and strategy discussions" },
+  { value: "2–4 Wks", label: "Sprint Velocity", detail: "Shipping production-ready brand, software and AI layers in weeks" },
+  { value: "1 System", label: "Unified Growth", detail: "Brand, product, AI automation and marketing designed to compound together" },
 ];
 
 export interface StoryChapter {

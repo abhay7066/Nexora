@@ -7,13 +7,8 @@ export interface Service {
   description: string;
   icon: LucideIcon;
   bullets: string[];
-}
-
-export interface Industry {
-  slug: string;
-  name: string;
-  description: string;
-  icon: LucideIcon;
+  categoryKey: "engineering" | "ai" | "brand" | "growth";
+  categoryName: string;
 }
 
 export interface Testimonial {
@@ -31,21 +26,31 @@ export interface ProcessStep {
 
 export interface CaseStudy {
   slug: string;
-  client: string;
   title: string;
-  category: string;
-  metric: string;
-  metricLabel: string;
-  summary: string;
+  topic: string;
+  categoryKey: "engineering" | "ai" | "brand" | "growth";
+  categoryName: string;
+  readTime: string;
+  statHighlight: string;
+  statLabel: string;
+  executiveSummary: string;
+  keyFindings: string[];
+  coreAnalysis: string;
+  strategicTakeaway: string;
+  techStack?: string[];
+  keywords: string[];
 }
 
-export interface Insight {
-  slug: string;
+export interface PortfolioItem {
+  id: string;
   title: string;
-  excerpt: string;
+  client: string;
   category: string;
-  readTime: string;
-  date: string;
+  tagline: string;
+  deliverables: string[];
+  impactMetric: string;
+  impactLabel: string;
+  featuredYear: string;
 }
 
 export interface NavItem {
