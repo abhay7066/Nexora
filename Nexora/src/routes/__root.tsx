@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
 import { Header } from "@/components/layout/Header";
@@ -132,6 +133,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col bg-background text-foreground relative isolate">
+        <Toaster position="bottom-right" richColors />
         <CursorTrail />
         <Header />
         <main className="flex-1">

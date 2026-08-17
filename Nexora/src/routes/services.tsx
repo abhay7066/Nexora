@@ -1,23 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/layout/PageHero";
-import { Solutions } from "@/components/sections/home/Solutions";
+import { ServiceShowcase } from "@/components/sections/services/ServiceShowcase";
 import { CTASection } from "@/components/sections/home/CTASection";
 import { Process } from "@/components/sections/home/Process";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — Nexora" },
+      { title: "Services & Capabilities — Nexora" },
       {
         name: "description",
         content:
-          "Branding, websites, custom software, mobile apps, AI automation, performance marketing and consulting — Nexora's seven practice areas.",
+          "Branding, high-performance web systems, custom SaaS, mobile apps, AI automation, performance marketing and growth consulting — Nexora's practice areas.",
       },
-      { property: "og:title", content: "Services — Nexora" },
+      { property: "og:title", content: "Services & Capabilities — Nexora" },
       {
         property: "og:description",
         content:
-          "Seven practice areas engineered as one growth system: brand, software, AI automation and marketing.",
+          "Integrated growth capabilities engineered as one system: brand, software, AI automation and performance marketing.",
       },
       { property: "og:url", content: "/services" },
     ],
@@ -30,16 +30,16 @@ function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
+        eyebrow="Capabilities & Services"
         title={
           <>
-            Seven practice areas.{" "}
-            <span className="text-gradient-primary italic">One growth system.</span>
+            Integrated growth capabilities.{" "}
+            <span className="text-gradient-primary italic">One accountable system.</span>
           </>
         }
-        lead="Strong practices individually — compounding in combination. Engage one, or engage the system."
+        lead="Modular practices engineered to operate independently or compound as an end-to-end growth system."
       />
-      <Solutions />
+      <ServiceShowcase />
       <Process />
       <CTASection />
     </>

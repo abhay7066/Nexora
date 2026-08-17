@@ -5,9 +5,9 @@ import { fadeUp, stagger, viewportOnce } from "@/hooks/useMotion";
 
 export function StatsSection() {
   return (
-    <Section>
+    <Section className="py-8">
       <motion.dl
-        variants={stagger(0.05, 0.1)}
+        variants={stagger(0.08, 0.1)}
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
@@ -17,17 +17,21 @@ export function StatsSection() {
           <motion.div
             key={s.label}
             variants={fadeUp}
-            className="surface-card flex flex-col gap-3 p-8"
+            className="surface-card flex flex-col justify-between h-full p-7 border border-border/60 hover:border-primary/30 transition-all duration-300"
           >
-            <dt className="flex items-baseline gap-2">
-              <span className="font-display text-5xl text-gradient-primary sm:text-6xl">
-                {s.value}
-              </span>
-              <span className="text-sm uppercase tracking-widest text-muted-foreground">
-                {s.label}
-              </span>
-            </dt>
-            <dd className="text-sm text-muted-foreground">{s.detail}</dd>
+            <div className="flex flex-col gap-2">
+              <dt className="flex flex-col gap-2">
+                <span className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-gradient-primary">
+                  {s.value}
+                </span>
+                <span className="text-base font-semibold text-foreground tracking-tight leading-snug">
+                  {s.label}
+                </span>
+              </dt>
+              <dd className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                {s.detail}
+              </dd>
+            </div>
           </motion.div>
         ))}
       </motion.dl>

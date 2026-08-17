@@ -30,19 +30,11 @@ Services
 
 ↓
 
-Industries
-
-↓
-
 Portfolio
 
 ↓
 
 Case Studies
-
-↓
-
-Insights
 
 ↓
 
@@ -146,44 +138,7 @@ How can Nexora help my business grow?
 Discuss My Business
 
 ---
-
-# PAGE-003 — Industries
-
-## Purpose
-
-Demonstrate industry expertise and increase visitor relevance.
-
-## User Question
-
-Do you understand businesses like mine?
-
-## Featured Industries
-
-- Manufacturing
-- Real Estate
-- Healthcare
-- D2C & E-commerce
-- SMEs
-- Startups
-
-## Each Industry Page Should Include
-
-- Industry Overview
-- Common Business Challenges
-- Recommended Solutions
-- Expected Outcomes
-- Relevant Case Studies
-- Frequently Asked Questions
-- Related Services
-- CTA
-
-## Primary CTA
-
-Schedule a Growth Consultation
-
----
-
-# PAGE-004 — Portfolio
+# PAGE-003 — Portfolio
 
 ## Purpose
 
@@ -281,37 +236,7 @@ Start Your Project / Book a Strategy Call
 
 ---
 
-# PAGE-007 — Insights
-
-## Purpose
-
-Build authority, educate visitors, and improve SEO.
-
-## Categories
-
-- Business Growth
-- AI
-- Branding
-- Marketing
-- Software Development
-- Technology
-- Industry Trends
-
-## Sections
-
-- Featured Articles
-- Latest Insights
-- Popular Topics
-- Newsletter
-- CTA
-
-## Primary CTA
-
-Explore Insights
-
----
-
-# PAGE-008 — Contact
+# PAGE-006 — Contact
 
 ## Purpose
 

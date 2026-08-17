@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/layout/PageHero";
 import { CTASection } from "@/components/sections/home/CTASection";
-import { WhyNexora } from "@/components/sections/home/WhyNexora";
-import { Process } from "@/components/sections/home/Process";
 import { StorySection } from "@/components/sections/about/StorySection";
 import { ValuesSection } from "@/components/sections/about/ValuesSection";
 import { StatsSection } from "@/components/sections/about/StatsSection";
@@ -45,8 +43,6 @@ function AboutPage() {
       <StatsSection />
       <StorySection />
       <ValuesSection />
-      <WhyNexora />
-      <Process />
       <CTASection />
     </>
   );
