@@ -7,7 +7,7 @@ import { fadeUp, viewportOnce } from "@/hooks/useMotion";
 
 export function CTASection() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32">
+    <section className="relative overflow-hidden py-16 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -50,7 +50,7 @@ export function CTASection() {
               variant="ghost"
               className="h-12 rounded-full border border-border px-6 text-foreground hover:bg-muted"
             >
-              <Link to="/case-studies">See our work</Link>
+              <Link to="/case-studies">Read case studies</Link>
             </Button>
           </div>
         </motion.div>

@@ -3,7 +3,6 @@ import { Hero } from "@/components/sections/home/Hero";
 import { GrowthChallenge } from "@/components/sections/home/GrowthChallenge";
 import { WhyNexora } from "@/components/sections/home/WhyNexora";
 import { CapabilitiesOverview } from "@/components/sections/home/CapabilitiesOverview";
-import { Process } from "@/components/sections/home/Process";
 import { FoundationalCommitments } from "@/components/sections/home/FoundationalCommitments";
 import { CTASection } from "@/components/sections/home/CTASection";
 
@@ -18,7 +17,6 @@ function HomePage() {
       <GrowthChallenge />
       <WhyNexora />
       <CapabilitiesOverview />
-      <Process />
       <FoundationalCommitments />
       <CTASection />
     </>

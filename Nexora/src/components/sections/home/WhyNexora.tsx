@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, ShieldCheck, Cpu, Zap, Target, Users, Handshake } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Zap, Target, Handshake } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { fadeUp, stagger, viewportOnce } from "@/hooks/useMotion";
@@ -13,30 +13,18 @@ const REASONS = [
   },
   {
     num: "02",
-    title: "Under one roof",
+    title: "Extended team",
     icon: Zap,
     body: "Brand, software, AI automation, and paid acquisition — one unified accountable team with zero hand-off friction.",
   },
   {
     num: "03",
-    title: "AI-native from day one",
-    icon: Cpu,
-    body: "We engineer custom LLM pipelines, WhatsApp API bots, and internal workflow tools that save hundreds of hours.",
-  },
-  {
-    num: "04",
     title: "Measured in outcomes",
     icon: Target,
     body: "Pipeline speed, recurring revenue, and retention — transparent metrics tied directly to actual business growth.",
   },
   {
-    num: "05",
-    title: "Senior builders by default",
-    icon: Users,
-    body: "You interface directly with senior engineers, designers, and growth leads — never junior account managers.",
-  },
-  {
-    num: "06",
+    num: "04",
     title: "Long-term growth partner",
     icon: Handshake,
     body: "We are structured as an embedded growth partner for years, providing continuous telemetry and optimization.",
@@ -54,7 +42,7 @@ export function WhyNexora() {
               Different from an <span className="text-gradient-primary">ordinary agency.</span>
             </>
           }
-          lead="Six core principles that make ambitious startups and enterprises treat us as their long-term growth partner."
+          lead="Four core principles that make ambitious startups and enterprises treat us as their long-term growth partner."
         />
         <motion.div
           variants={stagger(0.08, 0.08)}

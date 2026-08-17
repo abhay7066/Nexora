@@ -1,4 +1,4 @@
-import { Sparkles, Globe, Code2, Smartphone, Bot, LineChart, Compass } from "lucide-react";
+import { Sparkles, Globe, Code2, Smartphone, Bot, LineChart } from "lucide-react";
 import type { Service } from "@/types/content";
 
 export const SERVICES: Service[] = [
@@ -63,17 +63,6 @@ export const SERVICES: Service[] = [
     description: "Paid acquisition, conversion rate optimization (CRO), and lifecycle CRM automation engineered around CAC/LTV.",
     icon: LineChart,
     bullets: ["Paid media management", "Conversion optimization", "Lifecycle CRM", "Attribution analytics"],
-    categoryKey: "growth",
-    categoryName: "Growth & Marketing",
-  },
-  {
-    slug: "business-consulting",
-    title: "GTM & Growth Advisory",
-    tagline: "Senior operator partnership, not vendor at arm's length.",
-    description:
-      "Go-to-market strategy, operational leverage consulting, and growth advisory from senior operators who build and scale.",
-    icon: Compass,
-    bullets: ["GTM strategy design", "Unit economics audit", "Operational leverage", "Founder advisory"],
     categoryKey: "growth",
     categoryName: "Growth & Marketing",
   },

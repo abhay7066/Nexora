@@ -41,13 +41,6 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
-          <Button
-            asChild
-            variant="ghost"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
-            <Link to="/contact">Contact</Link>
-          </Button>
           <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link to="/contact">Book a strategy call</Link>
           </Button>

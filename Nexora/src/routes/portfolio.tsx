@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/layout/Section";
@@ -8,6 +8,9 @@ import { fadeUp, stagger, viewportOnce } from "@/hooks/useMotion";
 import { Layers, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/portfolio")({
+  beforeLoad: () => {
+    throw redirect({ to: "/services" });
+  },
   head: () => ({
     meta: [
       { title: "Our Work & Project Showcase — Nexora" },

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Code2, Bot, Sparkles, LineChart } from "lucide-react";
+import { ArrowRight, Bot, Sparkles, Globe, Code2 } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { fadeUp, stagger, viewportOnce } from "@/hooks/useMotion";
@@ -9,31 +9,31 @@ import { Button } from "@/components/ui/button";
 const PILLARS = [
   {
     num: "01",
-    title: "Software & Web Systems",
-    icon: Code2,
-    tagline: "Custom SaaS platforms, headless storefronts, and internal web portals built for high speed and scale.",
-    highlights: ["SaaS Web Apps", "Headless Storefronts", "Operations Dashboards"],
-  },
-  {
-    num: "02",
     title: "AI & Workflow Automation",
     icon: Bot,
     tagline: "Autonomous AI agents, Meta WhatsApp API bots, and custom LLM integrations that slash operating cost.",
     highlights: ["Autonomous AI Agents", "WhatsApp API Bots", "LLM Integrations"],
   },
   {
-    num: "03",
+    num: "02",
     title: "Brand Strategy & Positioning",
     icon: Sparkles,
     tagline: "Category positioning, visual identity systems, and brand voice guidelines that earn trust instantly.",
     highlights: ["Category Positioning", "Visual Identity", "Messaging & Voice"],
   },
   {
+    num: "03",
+    title: "Software & Web Systems",
+    icon: Globe,
+    tagline: "SEO-optimized, ultra-fast marketing websites and headless storefronts engineered for conversion and speed.",
+    highlights: ["Headless Storefronts", "Marketing Sites", "SEO Architecture"],
+  },
+  {
     num: "04",
-    title: "Performance & Growth",
-    icon: LineChart,
-    tagline: "Paid media acquisition, conversion rate optimization (CRO), and lifecycle CRM marketing.",
-    highlights: ["Paid Acquisition", "Conversion Rate CRO", "Lifecycle CRM"],
+    title: "SaaS & Internal Tools",
+    icon: Code2,
+    tagline: "Tailored SaaS web apps, customer portals, and internal telemetry tools built around your business operations.",
+    highlights: ["SaaS Web Platforms", "Admin Portals", "Custom APIs"],
   },
 ];
 
@@ -49,7 +49,7 @@ export function CapabilitiesOverview() {
               <span className="text-gradient-primary">One integrated engine.</span>
             </>
           }
-          lead="We combine custom engineering, AI automation, brand strategy, and performance marketing into one growth system."
+          lead="We combine AI automation, brand positioning, software systems, and custom SaaS into one growth engine."
         />
         <Button asChild variant="outline" className="rounded-full border-border hover:border-primary/40 font-medium">
           <Link to="/services" className="flex items-center gap-1.5 text-xs font-mono">

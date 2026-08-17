@@ -11,7 +11,7 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Branding, high-performance web systems, custom SaaS, mobile apps, AI automation, performance marketing and growth consulting — Nexora's practice areas.",
+          "Branding, high-performance web systems, custom SaaS, mobile apps, AI automation, and performance marketing — Nexora's practice areas.",
       },
       { property: "og:title", content: "Services & Capabilities — Nexora" },
       {

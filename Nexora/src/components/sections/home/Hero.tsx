@@ -8,7 +8,7 @@ import { HeroBackground } from "@/components/layout/HeroBackground";
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
+    <section className="relative isolate overflow-hidden pt-32 pb-16 sm:pt-36 sm:pb-20">
       <HeroBackground />
       <Container>
         <motion.div
@@ -61,25 +61,6 @@ export function Hero() {
             >
               <Link to="/services">Explore services</Link>
             </Button>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="mt-16 grid w-full grid-cols-2 gap-6 border-t border-border pt-10 sm:grid-cols-4"
-          >
-            {[
-              ["100%", "Founder-Led Execution"],
-              ["2–4 Wks", "Average Launch Speed"],
-              ["1 System", "Brand, Code & AI"],
-              ["0", "Agency Overhead Layers"],
-            ].map(([metric, label]) => (
-              <div key={label} className="flex flex-col items-center gap-1 text-center">
-                <div className="font-display text-2xl text-foreground sm:text-3xl">{metric}</div>
-                <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                  {label}
-                </div>
-              </div>
-            ))}
           </motion.div>
         </motion.div>
       </Container>

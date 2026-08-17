@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { submitContact } from "@/services/contactService";
 import { fadeUp, viewportOnce } from "@/hooks/useMotion";
+import { COMPANY } from "@/constants/nav";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -125,7 +126,7 @@ export function ContactForm() {
       </Button>
       {status === "error" && (
         <p className="text-xs font-mono text-destructive text-center">
-          Something went wrong. Please email us directly at hello@nexora.com.
+          Something went wrong. Please email us directly at {COMPANY.email}.
         </p>
       )}
     </motion.form>
