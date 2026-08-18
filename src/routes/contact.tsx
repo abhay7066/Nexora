@@ -56,7 +56,7 @@ function ContactPage() {
             <ContactItem
               icon={<Phone className="size-5" />}
               label="Response time"
-              value="Within one business day"
+              value="Within 12 hours"
             />
             <div className="surface-card mt-4 p-6">
               <p className="text-sm text-muted-foreground">

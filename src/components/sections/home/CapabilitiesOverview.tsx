@@ -53,7 +53,7 @@ export function CapabilitiesOverview() {
         />
         <Button asChild variant="outline" className="rounded-full border-border hover:border-primary/40 font-medium">
           <Link to="/services" className="flex items-center gap-1.5 text-xs font-mono">
-            <span>Explore Full Services</span>
+            <span>Explore All Services</span>
             <ArrowRight className="size-3.5" />
           </Link>
         </Button>

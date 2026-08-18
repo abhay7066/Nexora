@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { fadeUp, stagger, viewportOnce } from "@/hooks/useMotion";
-import { AlertTriangle, Repeat, Database, Globe, Bot, LineChart, Cpu, ArrowRight } from "lucide-react";
+import { AlertTriangle, Repeat, Database, Globe, Bot, LineChart, Cpu } from "lucide-react";
 
 const SYMPTOMS = [
   {
@@ -85,11 +85,6 @@ export function GrowthChallenge() {
                   <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground pl-1">
                     {symptom.body}
                   </p>
-
-                  <div className="mt-1 flex items-center gap-1.5 text-[11px] font-mono text-primary font-medium opacity-80 group-hover:opacity-100 transition-opacity">
-                    <span>Solved with System Alignment</span>
-                    <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
                 </motion.li>
               );
             })}
