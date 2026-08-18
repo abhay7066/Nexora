@@ -1,13 +1,13 @@
 import { Link } from "@tanstack/react-router";
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({ className, imgClassName }: { className?: string; imgClassName?: string }) {
   return (
     <Link
       to="/"
       aria-label="Nexora Technologies — home"
       className={"group inline-flex items-center gap-2.5 " + (className ?? "")}
     >
-      <img src="/logo.png" alt="" className="size-9 object-contain shrink-0" />
+      <img src="/logo.png" alt="" className={"object-contain shrink-0 " + (imgClassName ?? "size-9")} />
       <div className="flex flex-col items-end leading-none pr-1.5">
         <span className="font-display text-lg font-semibold tracking-tight text-foreground">
           Nexora
