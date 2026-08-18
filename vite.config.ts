@@ -54,7 +54,12 @@ export default defineConfig(({ command }) => {
         },
       }),
       viteReact(),
-      command === "build" ? nitro({ defaultPreset: "cloudflare-module" }) : null,
+      command === "build"
+        ? nitro({
+            defaultPreset: "cloudflare-module",
+            cloudflare: { wrangler: { workers_dev: false } },
+          })
+        : null,
     ].filter(Boolean),
     server: {
       host: "::",
