@@ -20,6 +20,7 @@ export function ContactForm() {
     const formData = new FormData(e.currentTarget);
     const name = String(formData.get("name") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
     const company = String(formData.get("company") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
 
@@ -37,10 +38,10 @@ export function ContactForm() {
 
     setStatus("submitting");
     try {
-      await submitContact({ name, email, company, message });
+      await submitContact({ name, email, phone, company, message });
       setStatus("success");
       toast.success("Strategy call requested!", {
-        description: "We will review your project and get back to you within 1 business day.",
+        description: "We will review your project and get back to you within 12 hours.",
       });
       (e.target as HTMLFormElement).reset();
     } catch {
@@ -62,7 +63,7 @@ export function ContactForm() {
         <CheckCircle2 className="size-12 text-primary" />
         <h2 className="font-display text-3xl font-bold text-foreground">Message Received!</h2>
         <p className="max-w-md text-sm text-muted-foreground leading-relaxed">
-          Thank you for reaching out. A senior builder on our team will review your inquiry and get back to you within one business day.
+          Thank you for reaching out. A senior builder on our team will review your inquiry and get back to you within 12 hours.
         </p>
         <Button
           onClick={() => setStatus("idle")}
@@ -86,10 +87,13 @@ export function ContactForm() {
       noValidate
     >
       <div className="grid gap-6 sm:grid-cols-2">
-        <Field label="Name" name="name" required autoComplete="name" error={errors.name} placeholder="Jane Doe" />
-        <Field label="Email" name="email" type="email" required autoComplete="email" error={errors.email} placeholder="jane@company.com" />
+        <Field label="Name" name="name" required autoComplete="name" error={errors.name} placeholder="Your name" />
+        <Field label="Email" name="email" type="email" required autoComplete="email" error={errors.email} placeholder="Email address" />
       </div>
-      <Field label="Company / Website" name="company" autoComplete="organization" placeholder="Company or domain" />
+      <div className="grid gap-6 sm:grid-cols-2">
+        <Field label="Phone" name="phone" type="tel" autoComplete="tel" placeholder="Mobile number" />
+        <Field label="Company / Website" name="company" autoComplete="organization" placeholder="Company or domain" />
+      </div>
       <div className="flex flex-col gap-2">
         <Label
           htmlFor="message"
