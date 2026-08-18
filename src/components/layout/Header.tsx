@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
-import { NAV_ITEMS } from "@/constants/nav";
+import { COMPANY, NAV_ITEMS } from "@/constants/nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -41,6 +41,13 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href={COMPANY.phoneHref}
+            aria-label={`Call us at ${COMPANY.phone}`}
+            className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+          >
+            <Phone className="size-4" />
+          </a>
           <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link to="/contact">Book a strategy call</Link>
           </Button>
