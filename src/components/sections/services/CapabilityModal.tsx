@@ -16,17 +16,17 @@ export function CapabilityModal({ service, open, onOpenChange }: CapabilityModal
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl bg-surface border-border/80 p-8 shadow-elevated">
+      <DialogContent className="max-w-2xl bg-surface border-border/80 p-6 sm:p-8 shadow-elevated">
         <DialogHeader className="gap-2">
           <div className="flex items-center gap-3">
-            <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20">
-              <Icon className="size-6" />
+            <div className="grid size-10 sm:size-12 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20">
+              <Icon className="size-5 sm:size-6" />
             </div>
             <div>
               <span className="text-[11px] font-mono uppercase tracking-widest text-primary font-semibold">
                 {service.categoryName}
               </span>
-              <DialogTitle className="text-2xl font-display font-bold text-foreground">
+              <DialogTitle className="text-xl sm:text-2xl font-display font-bold text-foreground">
                 {service.title}
               </DialogTitle>
             </div>
