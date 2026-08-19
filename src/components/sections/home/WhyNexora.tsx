@@ -58,6 +58,7 @@ export function WhyNexora() {
                 key={r.title}
                 variants={fadeUp}
                 whileHover={{ y: -5, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 350, damping: 22 }}
                 className="group surface-card flex flex-col justify-between p-6 border border-border/60 hover:border-primary/40 transition-all duration-300 rounded-2xl relative overflow-hidden select-none"
               >

@@ -25,49 +25,61 @@ export function Header() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "border-b border-border bg-background/70 backdrop-blur-xl"
-          : "border-b border-transparent",
-      )}
-    >
-      <div className="container-page flex h-16 items-center justify-between gap-6">
-        <Logo imgClassName="size-[62px]" />
-        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="relative rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground after:content-[''] after:absolute after:bottom-0.5 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-300 hover:after:w-5"
-              activeProps={{ className: "text-foreground after:w-5" }}
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div
+        className={cn(
+          "transition-all duration-300",
+          scrolled
+            ? "border-b border-border bg-background/80 backdrop-blur-md sm:bg-background/70 sm:backdrop-blur-xl"
+            : "border-b border-transparent",
+        )}
+      >
+        <div className="container-page flex h-16 items-center justify-between gap-6">
+          <Logo imgClassName="size-[62px]" />
+          <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="relative rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground after:content-[''] after:absolute after:bottom-0.5 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-300 hover:after:w-5"
+                activeProps={{ className: "text-foreground after:w-5" }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="hidden items-center gap-3 lg:flex">
+            <a
+              href={COMPANY.phoneHref}
+              aria-label={`Call us at ${COMPANY.phone}`}
+              className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
             >
-              {item.label}
+              <Phone className="size-4" />
+            </a>
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link to="/contact">Book a strategy call</Link>
+            </Button>
+          </div>
+          <div className="flex items-center gap-2 lg:hidden">
+            <Link
+              to="/contact"
+              aria-label="Book a strategy call"
+              onClick={() => setOpen(false)}
+              className="grid size-10 shrink-0 place-items-center rounded-md border border-border text-foreground"
+            >
+              <Phone className="size-5" />
             </Link>
-          ))}
-        </nav>
-        <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href={COMPANY.phoneHref}
-            aria-label={`Call us at ${COMPANY.phone}`}
-            className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
-          >
-            <Phone className="size-4" />
-          </a>
-          <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Link to="/contact">Book a strategy call</Link>
-          </Button>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className="grid size-10 place-items-center rounded-md border border-border text-foreground"
+            >
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          className="grid size-10 place-items-center rounded-md border border-border text-foreground lg:hidden"
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
       </div>
       {open && (
         <div className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-border bg-background lg:hidden">

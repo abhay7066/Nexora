@@ -31,6 +31,7 @@ export function AnimatedServiceCard({ service, onSelect }: AnimatedServiceCardPr
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -6, scale: 1.01 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
       onClick={() => onSelect(service)}
       className="group surface-card relative flex cursor-pointer flex-col justify-between overflow-hidden p-8 border border-border/60 hover:border-primary/50 transition-colors duration-300 rounded-2xl select-none"

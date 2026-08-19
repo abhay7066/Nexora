@@ -59,6 +59,7 @@ export function GrowthChallenge() {
                   key={symptom.title}
                   variants={fadeUp}
                   whileHover={{ x: 6, scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 350, damping: 22 }}
                   className="group surface-card relative flex flex-col gap-3 p-5 sm:p-6 border border-border/60 hover:border-primary/50 transition-all duration-300 rounded-2xl select-none overflow-hidden"
                 >
