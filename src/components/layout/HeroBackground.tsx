@@ -18,6 +18,10 @@ export function HeroBackground({ opacity = 0.85 }: HeroBackgroundProps) {
     if (!isMounted || !videoRef.current) return;
 
     const video = videoRef.current;
+    // iOS/WebKit requires muted to be set as a DOM property (not just an
+    // attribute) before play() is called, or it falls back to showing a
+    // tap-to-play button instead of autoplaying.
+    video.defaultMuted = true;
     video.muted = true;
     video.playsInline = true;
 
@@ -31,11 +35,20 @@ export function HeroBackground({ opacity = 0.85 }: HeroBackgroundProps) {
 
     safePlay();
 
+    // iOS can reject the very first play() call while the video is still
+    // buffering, so retry once more data becomes available.
+    video.addEventListener("loadedmetadata", safePlay);
+    video.addEventListener("loadeddata", safePlay);
+    video.addEventListener("canplay", safePlay);
+
     // Re-play if user returns to tab or window gains focus
     window.addEventListener("focus", safePlay);
     document.addEventListener("visibilitychange", safePlay);
 
     return () => {
+      video.removeEventListener("loadedmetadata", safePlay);
+      video.removeEventListener("loadeddata", safePlay);
+      video.removeEventListener("canplay", safePlay);
       window.removeEventListener("focus", safePlay);
       document.removeEventListener("visibilitychange", safePlay);
     };
@@ -78,6 +91,12 @@ export function HeroBackground({ opacity = 0.85 }: HeroBackgroundProps) {
           loop
           muted
           playsInline
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          // Legacy iOS Safari attribute name for inline playback; without it
+          // older WebKit versions can fall back to a tap-to-play button.
+          webkit-playsinline="true"
           onEnded={handleEnded}
           onPause={handlePause}
           className="w-full h-full object-cover object-center opacity-60 select-none pointer-events-none"

@@ -57,32 +57,3 @@ export const STATS: Stat[] = [
   { value: "2–4 Wks", label: "Sprint Velocity", detail: "Shipping production-ready brand, software and AI layers in weeks" },
   { value: "1 System", label: "Unified Growth", detail: "Brand, product, AI automation and marketing designed to compound together" },
 ];
-
-export interface StoryChapter {
-  year: string;
-  title: string;
-  body: string;
-}
-
-export const STORY: StoryChapter[] = [
-  {
-    year: "2019",
-    title: "Started as operators",
-    body: "Founded by a small team of ex-founders and engineering leads who'd built and sold products themselves — not consultants writing decks from the sidelines.",
-  },
-  {
-    year: "2021",
-    title: "Went multi-disciplinary",
-    body: "Brought brand, software and marketing under one roof after watching too many clients lose momentum in the handoffs between agencies.",
-  },
-  {
-    year: "2023",
-    title: "Rebuilt around AI",
-    body: "Rewrote our delivery model around AI-native workflows — shipping in weeks what previously took quarters, at a fraction of the cost.",
-  },
-  {
-    year: "Today",
-    title: "A growth partner, not a vendor",
-    body: "We work with a deliberately small number of ambitious teams as an embedded growth partner — measured on outcomes, not hours.",
-  },
-];

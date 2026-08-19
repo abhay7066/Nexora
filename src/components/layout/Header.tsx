@@ -17,6 +17,13 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       className={cn(
@@ -27,7 +34,7 @@ export function Header() {
       )}
     >
       <div className="container-page flex h-16 items-center justify-between gap-6">
-        <Logo imgClassName="size-14" />
+        <Logo imgClassName="size-[62px]" />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {NAV_ITEMS.map((item) => (
             <Link
@@ -63,22 +70,30 @@ export function Header() {
         </button>
       </div>
       {open && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-xl lg:hidden">
-          <nav aria-label="Mobile" className="container-page flex flex-col gap-1 py-4">
+        <div className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-border bg-background lg:hidden">
+          <nav aria-label="Mobile" className="container-page flex flex-col gap-1 py-6">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="rounded-md px-3 py-4 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
               >
                 {item.label}
               </Link>
             ))}
+            <a
+              href={COMPANY.phoneHref}
+              onClick={() => setOpen(false)}
+              className="mt-2 flex items-center gap-2 rounded-md px-3 py-4 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              <Phone className="size-4" />
+              {COMPANY.phone}
+            </a>
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-md bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground"
+              className="mt-4 rounded-md bg-primary px-4 py-4 text-center text-base font-medium text-primary-foreground"
             >
               Book a strategy call
             </Link>

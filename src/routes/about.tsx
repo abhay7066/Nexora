@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/layout/PageHero";
 import { CTASection } from "@/components/sections/home/CTASection";
-import { StorySection } from "@/components/sections/about/StorySection";
 import { ValuesSection } from "@/components/sections/about/ValuesSection";
 import { StatsSection } from "@/components/sections/about/StatsSection";
 
@@ -41,7 +40,6 @@ function AboutPage() {
         lead="We were tired of watching great businesses stall because their branding, software, marketing and automation lived in four different rooms. Nexora exists to put them in one."
       />
       <StatsSection />
-      <StorySection />
       <ValuesSection />
       <CTASection />
     </>
