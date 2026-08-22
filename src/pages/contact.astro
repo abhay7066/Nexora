@@ -5,6 +5,16 @@ import Section from "../components/layout/Section.astro";
 import ContactForm from "../components/sections/contact/ContactForm.astro";
 import { Mail, MapPin, Phone } from "@lucide/astro";
 import { COMPANY } from "../data/site.js";
+
+const siteUrl = (Astro.site?.toString() ?? "https://nexoratech.biz/").replace(/\/$/, "");
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact — Nexora",
+  url: `${siteUrl}/contact`,
+  description: "Book a strategy call with Nexora — an AI-powered business growth company. We respond within one business day.",
+  mainEntity: { "@id": `${siteUrl}/#organization` },
+};
 ---
 
 <Layout
@@ -14,6 +24,7 @@ import { COMPANY } from "../data/site.js";
   ogDescription="Book a 30-minute strategy call with our team."
   canonicalPath="/contact"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
   <PageHero eyebrow="Let's talk">
     Book a <span class="text-gradient-primary italic">strategy call.</span>
     <Fragment slot="lead">

@@ -3,7 +3,7 @@ import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import CursorTrail from "../components/common/CursorTrail.astro";
 import "../styles/global.css";
-import { SITE_TITLE, SITE_DESC } from "../data/site.js";
+import { SITE_TITLE, SITE_DESC, COMPANY } from "../data/site.js";
 
 interface Props {
   title?: string;
@@ -24,6 +24,57 @@ const {
 } = Astro.props;
 
 const canonicalUrl = canonicalPath ? new URL(canonicalPath, Astro.site) : undefined;
+
+// Site-wide Organization + WebSite JSON-LD, linked via @id so search engines
+// resolve WebSite.publisher back to the same Organization node on every page.
+const siteUrl = (Astro.site?.toString() ?? "https://nexoratech.biz/").replace(/\/$/, "");
+
+const organizationWebsiteSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: COMPANY.name,
+      url: `${siteUrl}/`,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png` },
+      description: COMPANY.description,
+      email: COMPANY.email,
+      telephone: COMPANY.phoneHref.replace("tel:", ""),
+      areaServed: "Worldwide",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: SITE_TITLE,
+      description: SITE_DESC,
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+  ],
+};
+
+// BreadcrumbList for inner pages — home is a single-item path, so Google's
+// guidance is to skip breadcrumb markup there rather than emit a length-1 list.
+const BREADCRUMB_LABELS: Record<string, string> = {
+  "/about": "About",
+  "/services": "Services",
+  "/case-studies": "Case Studies",
+  "/contact": "Contact",
+};
+
+const breadcrumbLabel = canonicalPath && canonicalPath !== "/" ? BREADCRUMB_LABELS[canonicalPath] : undefined;
+
+const breadcrumbSchema = breadcrumbLabel
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+        { "@type": "ListItem", position: 2, name: breadcrumbLabel, item: `${siteUrl}${canonicalPath}` },
+      ],
+    }
+  : undefined;
 ---
 
 <!doctype html>
@@ -43,6 +94,10 @@ const canonicalUrl = canonicalPath ? new URL(canonicalPath, Astro.site) : undefi
     <meta name="twitter:description" content={ogDescription} />
     {robots && <meta name="robots" content={robots} />}
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationWebsiteSchema)} />
+    {breadcrumbSchema && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    )}
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

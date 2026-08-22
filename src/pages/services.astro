@@ -4,6 +4,26 @@ import PageHero from "../components/layout/PageHero.astro";
 import ServiceShowcase from "../components/sections/services/ServiceShowcase.astro";
 import Process from "../components/sections/services/Process.astro";
 import CTASection from "../components/sections/home/CTASection.astro";
+import { SERVICES } from "../data/site.js";
+
+const siteUrl = (Astro.site?.toString() ?? "https://nexoratech.biz/").replace(/\/$/, "");
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: SERVICES.map((service, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Service",
+      name: service.title,
+      description: service.description,
+      url: `${siteUrl}/services#${service.slug}`,
+      category: service.categoryName,
+      provider: { "@id": `${siteUrl}/#organization` },
+      areaServed: "Worldwide",
+    },
+  })),
+};
 ---
 
 <Layout
@@ -13,6 +33,7 @@ import CTASection from "../components/sections/home/CTASection.astro";
   ogDescription="Integrated growth capabilities engineered as one system: brand, software, AI automation and performance marketing."
   canonicalPath="/services"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />
   <PageHero eyebrow="Capabilities & Services">
     Integrated growth capabilities. <span class="text-gradient-primary italic">One accountable system.</span>
     <Fragment slot="lead">

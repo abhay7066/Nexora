@@ -4,6 +4,16 @@ import PageHero from "../components/layout/PageHero.astro";
 import StatsSection from "../components/sections/about/StatsSection.astro";
 import ValuesSection from "../components/sections/about/ValuesSection.astro";
 import CTASection from "../components/sections/home/CTASection.astro";
+
+const siteUrl = (Astro.site?.toString() ?? "https://nexoratech.biz/").replace(/\/$/, "");
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About — Nexora",
+  url: `${siteUrl}/about`,
+  description: "Nexora is an AI-powered business growth company. Meet the operators behind the work.",
+  mainEntity: { "@id": `${siteUrl}/#organization` },
+};
 ---
 
 <Layout
@@ -13,6 +23,7 @@ import CTASection from "../components/sections/home/CTASection.astro";
   ogDescription="An AI-powered growth partner built by operators — brand, software, automation and marketing under one roof."
   canonicalPath="/about"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
   <PageHero eyebrow="About Nexora">
     Operators, not vendors. <span class="text-gradient-primary italic">Partners, not projects.</span>
     <Fragment slot="lead">

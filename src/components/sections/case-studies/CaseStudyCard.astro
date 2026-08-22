@@ -22,7 +22,7 @@ interface Props {
 const { cs } = Astro.props;
 ---
 
-<div class="case-study-item" data-category={cs.categoryKey}>
+<div id={cs.slug} class="case-study-item" data-category={cs.categoryKey}>
   <article
     data-reveal
     class="surface-card group grid gap-8 p-8 md:p-10 border border-border/60 hover:border-primary/40 transition-all duration-300 rounded-3xl relative overflow-hidden"

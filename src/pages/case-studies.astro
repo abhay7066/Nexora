@@ -5,6 +5,26 @@ import Section from "../components/layout/Section.astro";
 import CTASection from "../components/sections/home/CTASection.astro";
 import CaseStudyCard from "../components/sections/case-studies/CaseStudyCard.astro";
 import { CASE_STUDIES, CASE_STUDY_CATEGORIES } from "../data/site.js";
+
+const siteUrl = (Astro.site?.toString() ?? "https://nexoratech.biz/").replace(/\/$/, "");
+const caseStudiesSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: CASE_STUDIES.map((cs, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: cs.title,
+      about: cs.topic,
+      description: cs.executiveSummary,
+      url: `${siteUrl}/case-studies#${cs.slug}`,
+      keywords: cs.keywords.join(", "),
+      author: { "@id": `${siteUrl}/#organization` },
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+  })),
+};
 ---
 
 <Layout
@@ -14,6 +34,7 @@ import { CASE_STUDIES, CASE_STUDY_CATEGORIES } from "../data/site.js";
   ogDescription="Research-backed growth breakdowns, technical stack implementations, and strategic P&L insights."
   canonicalPath="/case-studies"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(caseStudiesSchema)} />
   <PageHero eyebrow="Research & Strategy Papers">
     Growth systems, <span class="text-gradient-primary italic">researched & engineered.</span>
     <Fragment slot="lead">
