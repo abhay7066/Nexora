@@ -1,0 +1,199 @@
+---
+import Section from "../../layout/Section.astro";
+import SectionHeading from "../../common/SectionHeading.astro";
+import { AlertTriangle, Repeat, Database, Globe, Bot, LineChart, Cpu } from "@lucide/astro";
+
+const SYMPTOMS = [
+  {
+    num: "01",
+    icon: AlertTriangle,
+    title: "Isolated Marketing & Funnel Silos",
+    body: "Marketing spends budget driving traffic, but sales processes and website messaging aren't aligned to convert leads into pipeline.",
+    tag: "High CAC & Drop-off",
+  },
+  {
+    num: "02",
+    icon: Database,
+    title: "Trapped Customer Data & Analytics",
+    body: "Valuable customer behavior data is locked across CRMs and analytics platforms, but never transformed into automated growth actions.",
+    tag: "Unused Intelligence",
+  },
+  {
+    num: "03",
+    icon: Repeat,
+    title: "Manual Operational Overhead",
+    body: "Teams waste dozens of hours every week manually copy-pasting data because tools and software stack don't talk to each other.",
+    tag: "Operational Friction",
+  },
+];
+---
+
+<Section class="border-t border-border/40">
+  <div class="grid gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] items-center">
+    <!-- Left side: Symptoms -->
+    <div data-reveal class="flex flex-col">
+      <SectionHeading eyebrow="The Growth Challenge">
+        Your business doesn't need more tools. <span class="text-gradient-primary">It needs system alignment.</span>
+        <Fragment slot="lead">
+          Growth fails when systems operate in isolation. When brand, software, AI automation, and performance
+          channels don't communicate, teams waste time on friction instead of scaling.
+        </Fragment>
+      </SectionHeading>
+
+      <ul data-reveal-group class="mt-10 flex flex-col gap-4">
+        {SYMPTOMS.map((symptom) => (
+          <li class="hover-lift group surface-card relative flex flex-col gap-3 p-5 sm:p-6 border border-border/60 hover:border-primary/50 transition-all duration-300 rounded-2xl select-none overflow-hidden">
+            <div aria-hidden="true" class="absolute top-0 bottom-0 left-0 w-1 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="grid size-10 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
+                  <symptom.icon class="size-5" />
+                </div>
+                <h3 class="text-base font-display font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {symptom.title}
+                </h3>
+              </div>
+              <span class="rounded-full bg-background border border-border/60 px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
+                {symptom.tag}
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm leading-relaxed text-muted-foreground pl-1">{symptom.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Right side: Integrated System Diagram -->
+    <div
+      data-reveal
+      data-reveal-lines
+      class="group relative aspect-square max-w-[450px] mx-auto w-full flex items-center justify-center p-8 bg-surface-card rounded-2xl border border-border/60 hover:border-primary/50 transition-all duration-500 overflow-hidden shadow-elevated select-none"
+    >
+      <svg class="pointer-events-none absolute inset-0 size-full z-20 overflow-hidden">
+        <defs>
+          <linearGradient id="diagramBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="oklch(0.7 0.22 300)" stop-opacity="0.9"></stop>
+            <stop offset="50%" stop-color="oklch(0.55 0.2 300)" stop-opacity="0.4"></stop>
+            <stop offset="100%" stop-color="oklch(0.45 0.16 300)" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <rect
+          x="1.5"
+          y="1.5"
+          width="99.2%"
+          height="99.2%"
+          rx="15"
+          fill="none"
+          stroke="url(#diagramBorderGrad)"
+          stroke-width="2.5"
+          stroke-dasharray="140 400"
+          class="diagram-border-sweep opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        ></rect>
+      </svg>
+
+      <div class="absolute inset-0 grid-bg opacity-30"></div>
+
+      <svg class="w-full h-full relative z-10" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="120" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 8" opacity="0.25"></circle>
+        <circle cx="200" cy="200" r="60" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 8" opacity="0.2"></circle>
+
+        <line class="diagram-line" data-delay="1" x1="200" y1="200" x2="100" y2="130" stroke="var(--primary)" stroke-width="2"></line>
+        <line class="diagram-line" data-delay="2" x1="200" y1="200" x2="300" y2="130" stroke="var(--primary)" stroke-width="2"></line>
+        <line class="diagram-line" data-delay="3" x1="200" y1="200" x2="200" y2="70" stroke="var(--primary)" stroke-width="2"></line>
+        <line class="diagram-line" data-delay="4" x1="200" y1="200" x2="100" y2="270" stroke="var(--primary)" stroke-width="2"></line>
+        <line class="diagram-line" data-delay="5" x1="200" y1="200" x2="300" y2="270" stroke="var(--primary)" stroke-width="2"></line>
+
+        <circle cx="200" cy="200" r="45" fill="var(--primary)" class="opacity-[0.06] diagram-pulse"></circle>
+
+        <circle cx="200" cy="200" r="32" fill="var(--surface)" stroke="var(--primary)" stroke-width="2"></circle>
+        <text x="200" y="204" text-anchor="middle" class="text-[11px] font-display font-bold fill-primary tracking-wider">NEXORA</text>
+
+        <g class="group-hover:scale-105 transition-transform">
+          <circle cx="100" cy="130" r="22" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"></circle>
+          <foreignObject x="89" y="119" width="22" height="22">
+            <div class="text-muted-foreground flex items-center justify-center h-full"><Globe class="size-3.5" /></div>
+          </foreignObject>
+          <text x="100" y="167" text-anchor="middle" class="text-[9px] font-mono fill-muted-foreground">Website</text>
+        </g>
+
+        <g class="group-hover:scale-105 transition-transform">
+          <circle cx="300" cy="130" r="22" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"></circle>
+          <foreignObject x="289" y="119" width="22" height="22">
+            <div class="text-muted-foreground flex items-center justify-center h-full"><LineChart class="size-3.5" /></div>
+          </foreignObject>
+          <text x="300" y="167" text-anchor="middle" class="text-[9px] font-mono fill-muted-foreground">Growth</text>
+        </g>
+
+        <g class="group-hover:scale-105 transition-transform">
+          <circle cx="200" cy="70" r="22" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"></circle>
+          <foreignObject x="189" y="59" width="22" height="22">
+            <div class="text-muted-foreground flex items-center justify-center h-full"><Cpu class="size-3.5" /></div>
+          </foreignObject>
+          <text x="200" y="104" text-anchor="middle" class="text-[9px] font-mono fill-muted-foreground">AI Automation</text>
+        </g>
+
+        <g class="group-hover:scale-105 transition-transform">
+          <circle cx="100" cy="270" r="22" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"></circle>
+          <foreignObject x="89" y="259" width="22" height="22">
+            <div class="text-muted-foreground flex items-center justify-center h-full"><Database class="size-3.5" /></div>
+          </foreignObject>
+          <text x="100" y="307" text-anchor="middle" class="text-[9px] font-mono fill-muted-foreground">CRM & Data</text>
+        </g>
+
+        <g class="group-hover:scale-105 transition-transform">
+          <circle cx="300" cy="270" r="22" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"></circle>
+          <foreignObject x="289" y="259" width="22" height="22">
+            <div class="text-muted-foreground flex items-center justify-center h-full"><Bot class="size-3.5" /></div>
+          </foreignObject>
+          <text x="300" y="307" text-anchor="middle" class="text-[9px] font-mono fill-muted-foreground">Ops Engine</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .diagram-line {
+    stroke-dasharray: 160;
+    stroke-dashoffset: 160;
+    transition: stroke-dashoffset 1.2s ease-out;
+  }
+  [data-reveal-lines].is-visible .diagram-line[data-delay="1"] { transition-delay: 0.2s; }
+  [data-reveal-lines].is-visible .diagram-line[data-delay="2"] { transition-delay: 0.4s; }
+  [data-reveal-lines].is-visible .diagram-line[data-delay="3"] { transition-delay: 0.6s; }
+  [data-reveal-lines].is-visible .diagram-line[data-delay="4"] { transition-delay: 0.8s; }
+  [data-reveal-lines].is-visible .diagram-line[data-delay="5"] { transition-delay: 1.0s; }
+  [data-reveal-lines].is-visible .diagram-line {
+    stroke-dashoffset: 0;
+  }
+
+  @keyframes diagram-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+  .diagram-pulse {
+    transform-origin: 200px 200px;
+    animation: diagram-pulse 3.5s ease-in-out infinite;
+  }
+
+  @keyframes border-sweep {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -540; }
+  }
+  .diagram-border-sweep {
+    animation: border-sweep 3.5s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .diagram-line {
+      stroke-dashoffset: 0 !important;
+      transition: none !important;
+    }
+    .diagram-pulse,
+    .diagram-border-sweep {
+      animation: none !important;
+    }
+  }
+</style>

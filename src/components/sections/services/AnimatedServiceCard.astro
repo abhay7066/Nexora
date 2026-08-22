@@ -1,0 +1,87 @@
+---
+import { ArrowUpRight, CheckCircle2, Layers } from "@lucide/astro";
+import Icon from "../../common/Icon.astro";
+
+interface Props {
+  service: {
+    slug: string;
+    title: string;
+    tagline: string;
+    description: string;
+    icon: string;
+    bullets: string[];
+    categoryKey: string;
+    categoryName: string;
+  };
+}
+const { service } = Astro.props;
+---
+
+<div
+  class="service-card group surface-card relative flex cursor-pointer flex-col justify-between overflow-hidden p-8 border border-border/60 hover:border-primary/50 transition-colors duration-300 rounded-2xl select-none hover-lift"
+  data-service-card={service.slug}
+  data-category={service.categoryKey}
+  role="button"
+  tabindex="0"
+>
+  <!-- Interactive cursor spotlight overlay -->
+  <div aria-hidden="true" class="service-card-spotlight pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 rounded-2xl"></div>
+
+  <div class="relative z-10">
+    <div class="flex items-center justify-between gap-4">
+      <div class="service-card-icon grid size-12 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20 shadow-sm transition-transform duration-300">
+        <Icon name={service.icon} class="size-6" />
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="rounded-full bg-background/80 border border-border/60 px-3 py-1 text-[11px] font-mono text-muted-foreground">
+          {service.categoryName}
+        </span>
+        <div class="grid size-8 place-items-center rounded-full bg-surface border border-border text-muted-foreground group-hover:border-primary/40 group-hover:text-primary transition-all duration-300">
+          <ArrowUpRight class="size-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-6 font-display text-2xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors">
+      {service.title}
+    </h3>
+    <p class="mt-2 text-sm font-medium text-primary/90">{service.tagline}</p>
+    <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+
+    <div class="mt-6 pt-5 border-t border-border/40">
+      <div class="flex items-center gap-1.5 text-xs font-mono uppercase text-muted-foreground mb-3 tracking-wider">
+        <Layers class="size-3.5 text-primary" />
+        <span>Key Scope & Deliverables</span>
+      </div>
+      <ul class="grid gap-2 sm:grid-cols-2">
+        {service.bullets.map((bullet) => (
+          <li class="flex items-center gap-2 text-xs text-foreground/90 font-medium">
+            <CheckCircle2 class="size-3.5 text-primary shrink-0" />
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="relative z-10 mt-8 pt-4 border-t border-border/30 flex items-center justify-between text-xs font-mono text-muted-foreground">
+    <span>Click card to explore details</span>
+    <span class="text-primary font-semibold group-hover:underline">Deep Dive →</span>
+  </div>
+</div>
+
+<style>
+  .service-card-icon {
+    transform: scale(1) rotate(0deg);
+  }
+  .service-card:hover .service-card-icon {
+    transform: scale(1.08) rotate(3deg);
+  }
+  .service-card-spotlight {
+    background: radial-gradient(350px circle at var(--spot-x, 50%) var(--spot-y, 50%), oklch(0.45 0.16 300 / 0.14), transparent 80%);
+  }
+  .service-card:hover .service-card-spotlight {
+    opacity: 1;
+  }
+</style>

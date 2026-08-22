@@ -1,0 +1,178 @@
+---
+import { Phone, Menu, X } from "@lucide/astro";
+import Logo from "../common/Logo.astro";
+import { COMPANY, NAV_ITEMS } from "../../data/site.js";
+
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<header id="site-header" class="fixed inset-x-0 top-0 z-50">
+  <div id="header-bar" class="border-b border-transparent transition-all duration-300">
+    <div class="container-page flex h-16 items-center justify-between gap-6">
+      <Logo imgClassName="size-[62px]" />
+
+      <nav aria-label="Primary" class="hidden items-center gap-1 lg:flex">
+        {NAV_ITEMS.map((item) => {
+          const isActive = currentPath === item.to;
+          return (
+            <a
+              href={item.to}
+              class:list={[
+                "relative rounded-md px-3 py-2 text-sm transition-colors after:content-[''] after:absolute after:bottom-0.5 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-300 hover:text-foreground hover:after:w-5",
+                isActive ? "text-foreground after:w-5" : "text-muted-foreground",
+              ]}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <div class="hidden items-center gap-3 lg:flex">
+        <a
+          href={COMPANY.phoneHref}
+          aria-label={`Call us at ${COMPANY.phone}`}
+          class="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+        >
+          <Phone class="size-4" />
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          Book a strategy call
+        </a>
+      </div>
+
+      <div class="flex items-center gap-2 lg:hidden">
+        <a
+          href="/contact"
+          aria-label="Book a strategy call"
+          class="grid size-10 shrink-0 place-items-center rounded-md border border-border text-foreground"
+        >
+          <Phone class="size-5" />
+        </a>
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          aria-label="Open menu"
+          aria-expanded="false"
+          class="grid size-10 place-items-center rounded-md border border-border text-foreground"
+        >
+          <Menu id="mobile-menu-icon-open" class="size-5" />
+          <X id="mobile-menu-icon-close" class="hidden size-5" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-panel" class="glass fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto lg:hidden" hidden>
+    <nav aria-label="Mobile" class="container-page flex flex-col gap-1 py-6">
+      {NAV_ITEMS.map((item) => (
+        <a
+          href={item.to}
+          data-mobile-link
+          class="rounded-md px-3 py-4 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={COMPANY.phoneHref}
+        data-mobile-link
+        class="mt-2 flex items-center gap-2 rounded-md px-3 py-4 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        <Phone class="size-4" />
+        {COMPANY.phone}
+      </a>
+      <a
+        href="/contact"
+        data-mobile-link
+        class="mt-4 rounded-md bg-primary px-4 py-4 text-center text-base font-medium text-primary-foreground"
+      >
+        Book a strategy call
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  #header-bar.is-scrolled {
+    border-color: var(--color-border);
+    background: color-mix(in oklch, var(--background) 80%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  @media (min-width: 640px) {
+    #header-bar.is-scrolled {
+      background: color-mix(in oklch, var(--background) 70%, transparent);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+  }
+
+  /* New: a real open/close transition for the mobile panel (the live site
+     has none — this is a deliberate "good animations on mobile" addition). */
+  #mobile-panel {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.25s var(--ease-out-expo),
+      transform 0.25s var(--ease-out-expo);
+  }
+
+  #mobile-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #mobile-panel[hidden] {
+    display: none;
+  }
+</style>
+
+<script>
+  function initHeader() {
+    const headerBar = document.getElementById('header-bar');
+    const panel = document.getElementById('mobile-panel');
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const iconOpen = document.getElementById('mobile-menu-icon-open');
+    const iconClose = document.getElementById('mobile-menu-icon-close');
+    if (!headerBar || !panel || !toggle || !iconOpen || !iconClose) return;
+
+    const onScroll = () => {
+      headerBar.classList.toggle('is-scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    let open = false;
+    const setOpen = (next) => {
+      open = next;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+      document.body.style.overflow = open ? 'hidden' : '';
+
+      if (open) {
+        panel.hidden = false;
+        // Force layout so the transition runs from the [hidden] initial state.
+        requestAnimationFrame(() => panel.classList.add('is-open'));
+      } else {
+        panel.classList.remove('is-open');
+        window.setTimeout(() => {
+          if (!open) panel.hidden = true;
+        }, 250);
+      }
+    };
+
+    toggle.addEventListener('click', () => setOpen(!open));
+    panel.querySelectorAll('[data-mobile-link]').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+  }
+
+  initHeader();
+</script>

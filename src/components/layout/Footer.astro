@@ -1,0 +1,60 @@
+---
+import Logo from "../common/Logo.astro";
+import { COMPANY, NAV_ITEMS, SERVICES } from "../../data/site.js";
+
+const currentYear = new Date().getFullYear();
+const serviceLinks = SERVICES.map((s) => ({ label: s.title, to: "/services" }));
+---
+
+<footer class="border-t border-border">
+  <div class="container-page grid gap-12 py-16 lg:grid-cols-4">
+    <div class="flex flex-col gap-4">
+      <Logo />
+      <p class="max-w-xs text-sm text-muted-foreground">{COMPANY.description}</p>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <h3 class="text-xs font-medium uppercase tracking-widest text-muted-foreground">Company</h3>
+      <ul class="flex flex-col gap-2">
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a href={item.to} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <h3 class="text-xs font-medium uppercase tracking-widest text-muted-foreground">Services</h3>
+      <ul class="flex flex-col gap-2">
+        {serviceLinks.map((link) => (
+          <li>
+            <a href={link.to} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <h3 class="text-xs font-medium uppercase tracking-widest text-muted-foreground">Contact</h3>
+      <a href={`mailto:${COMPANY.email}`} class="text-sm text-foreground hover:text-primary">{COMPANY.email}</a>
+      <p class="text-sm text-muted-foreground">{COMPANY.location}</p>
+      <a
+        href="/contact"
+        class="mt-2 inline-flex w-fit rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+      >
+        Book a strategy call
+      </a>
+    </div>
+  </div>
+  <div class="border-t border-border">
+    <div class="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-muted-foreground sm:flex-row">
+      <p>© {currentYear} {COMPANY.name}. All rights reserved.</p>
+      <p>Built for ambitious businesses.</p>
+    </div>
+  </div>
+</footer>

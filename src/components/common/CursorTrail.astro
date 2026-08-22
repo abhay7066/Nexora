@@ -1,0 +1,83 @@
+---
+// Faithful vanilla-JS port of the React build's CursorTrail.tsx: a 12-point
+// elastic chain following the mouse, rendered as a single smooth SVG path.
+// Disabled entirely on touch devices and under prefers-reduced-motion.
+---
+
+<svg id="cursor-trail" aria-hidden="true" class="cursor-trail pointer-events-none fixed inset-0 z-50 size-full overflow-hidden">
+  <defs>
+    <linearGradient id="cursorLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="oklch(0.65 0.22 300)" stop-opacity="0.8"></stop>
+      <stop offset="50%" stop-color="oklch(0.55 0.2 300)" stop-opacity="0.4"></stop>
+      <stop offset="100%" stop-color="oklch(0.45 0.16 300)" stop-opacity="0"></stop>
+    </linearGradient>
+  </defs>
+  <path id="cursor-trail-path" fill="none" stroke="url(#cursorLineGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+
+<style>
+  /* SVG elements don't respect the `hidden` IDL property the same way HTML
+     elements do, so visibility is toggled via a class instead. */
+  .cursor-trail {
+    display: none;
+  }
+  .cursor-trail.is-active {
+    display: block;
+  }
+</style>
+
+<script>
+  const TRAIL_LENGTH = 12;
+
+  function initCursorTrail() {
+    const svg = document.getElementById('cursor-trail');
+    const path = document.getElementById('cursor-trail-path');
+    if (!svg || !path) return;
+
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isTouch || reduceMotion) return;
+
+    let animId = 0;
+    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const points = Array.from({ length: TRAIL_LENGTH }, () => ({ x: mouse.x, y: mouse.y }));
+    let started = false;
+
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      if (!started) {
+        started = true;
+        svg.classList.add('is-active');
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    const render = () => {
+      points[0].x += (mouse.x - points[0].x) * 0.35;
+      points[0].y += (mouse.y - points[0].y) * 0.35;
+
+      for (let i = 1; i < TRAIL_LENGTH; i++) {
+        points[i].x += (points[i - 1].x - points[i].x) * 0.35;
+        points[i].y += (points[i - 1].y - points[i].y) * 0.35;
+      }
+
+      if (points.length > 1) {
+        let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+        for (let i = 1; i < points.length; i++) {
+          const xc = ((points[i].x + points[i - 1].x) / 2).toFixed(1);
+          const yc = ((points[i].y + points[i - 1].y) / 2).toFixed(1);
+          d += ` Q ${points[i - 1].x.toFixed(1)} ${points[i - 1].y.toFixed(1)}, ${xc} ${yc}`;
+        }
+        path.setAttribute('d', d);
+      }
+
+      animId = requestAnimationFrame(render);
+    };
+
+    animId = requestAnimationFrame(render);
+  }
+
+  initCursorTrail();
+</script>

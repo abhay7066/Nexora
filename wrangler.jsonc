@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nexora-astro",
+  "compatibility_date": "2026-08-22",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+  // Not wired to the live production domain (nexoratech.biz) yet — that's currently
+  // routed to the existing Nitro/TanStack Start Worker (see ../nitro.config.ts).
+  // Once this site is ready to go live, add:
+  //   "routes": [{ "pattern": "nexoratech.biz", "custom_domain": true }]
+  // and retire the old Worker's route first to avoid a routing conflict.
+}

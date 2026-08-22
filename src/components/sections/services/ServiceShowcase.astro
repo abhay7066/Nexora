@@ -1,0 +1,105 @@
+---
+import Section from "../../layout/Section.astro";
+import AnimatedServiceCard from "./AnimatedServiceCard.astro";
+import CapabilityModal from "./CapabilityModal.astro";
+import { SERVICES, SERVICE_CATEGORIES } from "../../../data/site.js";
+---
+
+<Section class="pt-2 pb-20">
+  <div data-reveal class="flex flex-wrap items-center justify-center gap-2 mb-14">
+    {SERVICE_CATEGORIES.map((cat, i) => (
+      <button
+        type="button"
+        data-category-filter={cat.key}
+        class:list={[
+          "category-pill rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 border cursor-pointer select-none",
+          i === 0
+            ? "bg-primary text-primary-foreground border-primary shadow-sm is-active"
+            : "bg-surface/80 text-muted-foreground border-border hover:border-primary/40 hover:text-foreground",
+        ]}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+
+  <div id="service-grid" class="grid gap-8 md:grid-cols-2">
+    {SERVICES.map((service) => (
+      <div class="service-grid-item" data-category={service.categoryKey}>
+        <AnimatedServiceCard service={service} />
+      </div>
+    ))}
+  </div>
+
+  {SERVICES.map((service) => <CapabilityModal service={service} />)}
+</Section>
+
+<style>
+  .service-grid-item {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+  .service-grid-item.is-hidden {
+    display: none;
+  }
+  .service-grid-item.is-entering {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+</style>
+
+<script>
+  function initServiceShowcase() {
+    const pills = document.querySelectorAll('[data-category-filter]');
+    const items = document.querySelectorAll('.service-grid-item');
+    const cards = document.querySelectorAll('[data-service-card]');
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const category = pill.getAttribute('data-category-filter');
+
+        pills.forEach((p) => {
+          const active = p === pill;
+          p.classList.toggle('is-active', active);
+          p.classList.toggle('bg-primary', active);
+          p.classList.toggle('text-primary-foreground', active);
+          p.classList.toggle('border-primary', active);
+          p.classList.toggle('shadow-sm', active);
+          p.classList.toggle('bg-surface/80', !active);
+          p.classList.toggle('text-muted-foreground', !active);
+          p.classList.toggle('border-border', !active);
+        });
+
+        items.forEach((item) => {
+          const matches = category === 'all' || item.getAttribute('data-category') === category;
+          if (matches) {
+            item.classList.remove('is-hidden');
+            item.classList.add('is-entering');
+            requestAnimationFrame(() => item.classList.remove('is-entering'));
+          } else {
+            item.classList.add('is-entering');
+            window.setTimeout(() => item.classList.add('is-hidden'), 300);
+          }
+        });
+      });
+    });
+
+    cards.forEach((card) => {
+      const openModal = () => {
+        const slug = card.getAttribute('data-service-card');
+        const modal = document.getElementById(`modal-${slug}`);
+        if (modal instanceof HTMLDialogElement) modal.showModal();
+      };
+      card.addEventListener('click', openModal);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal();
+        }
+      });
+    });
+  }
+
+  initServiceShowcase();
+</script>

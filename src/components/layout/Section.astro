@@ -1,0 +1,15 @@
+---
+import Container from "./Container.astro";
+
+interface Props {
+  bare?: boolean;
+  as?: "section" | "div" | "article" | "aside";
+  class?: string;
+  id?: string;
+}
+const { bare = false, as: Tag = "section", class: className, id } = Astro.props;
+---
+
+<Tag class:list={["relative", className]} style="padding-block: var(--section-y)" id={id}>
+  {bare ? <slot /> : <Container><slot /></Container>}
+</Tag>

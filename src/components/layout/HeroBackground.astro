@@ -1,0 +1,75 @@
+---
+interface Props {
+  opacity?: number;
+}
+const { opacity = 0.85 } = Astro.props;
+---
+
+<div class="hero-video-wrap pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none" style={`opacity:${opacity}`}>
+  <div class="absolute inset-0 bg-background transition-colors duration-500">
+    <video
+      id="hero-video"
+      src="/videos/final_falcon_backGround.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+      disablepictureinpicture
+      disableremoteplayback
+      webkit-playsinline="true"
+      class="w-full h-full object-cover object-center opacity-60 select-none pointer-events-none"
+    ></video>
+    <!-- Ambient gradient overlays for readable text and smooth blend -->
+    <div class="absolute inset-0 bg-background/30 md:bg-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background"></div>
+    <div class="absolute inset-0 grid-bg opacity-30"></div>
+  </div>
+</div>
+
+<script>
+  // Playback resilience to prevent browser autoplay blocks or unexpected pauses,
+  // ported verbatim from the React build's HeroBackground.tsx.
+  function initHeroVideo() {
+    const video = document.getElementById('hero-video');
+    if (!(video instanceof HTMLVideoElement)) return;
+
+    // iOS/WebKit requires muted to be set as a DOM property (not just an
+    // attribute) before play() is called, or it falls back to a tap-to-play button.
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+
+    const safePlay = () => {
+      if (video.paused) {
+        video.play().catch(() => {
+          // Fallback if the browser requires a user interaction first.
+        });
+      }
+    };
+
+    safePlay();
+
+    // iOS can reject the very first play() call while still buffering, so retry.
+    video.addEventListener('loadedmetadata', safePlay);
+    video.addEventListener('loadeddata', safePlay);
+    video.addEventListener('canplay', safePlay);
+
+    // Re-play if the user returns to the tab or the window regains focus.
+    window.addEventListener('focus', safePlay);
+    document.addEventListener('visibilitychange', safePlay);
+
+    video.addEventListener('ended', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+
+    video.addEventListener('pause', () => {
+      if (video.currentTime < video.duration) {
+        video.play().catch(() => {});
+      }
+    });
+  }
+
+  initHeroVideo();
+</script>

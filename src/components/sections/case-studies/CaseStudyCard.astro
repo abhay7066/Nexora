@@ -1,0 +1,137 @@
+---
+import { Cpu, CheckCircle2, Search, BookOpen, Clock, ArrowRight, Sparkles, Lightbulb } from "@lucide/astro";
+
+interface Props {
+  cs: {
+    slug: string;
+    title: string;
+    topic: string;
+    categoryKey: string;
+    categoryName: string;
+    readTime: string;
+    statHighlight: string;
+    statLabel: string;
+    executiveSummary: string;
+    keyFindings: string[];
+    coreAnalysis: string;
+    strategicTakeaway: string;
+    techStack?: string[];
+    keywords: string[];
+  };
+}
+const { cs } = Astro.props;
+---
+
+<div class="case-study-item" data-category={cs.categoryKey}>
+  <article class="surface-card group grid gap-8 p-8 md:p-10 border border-border/60 hover:border-primary/40 transition-all duration-300 rounded-3xl relative overflow-hidden">
+    <div aria-hidden="true" class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-border/40 pb-5">
+      <div class="flex items-center gap-3">
+        <span class="rounded-full bg-primary/10 border border-primary/20 px-3.5 py-1 text-xs font-mono font-medium text-primary">{cs.categoryName}</span>
+        <span class="text-xs font-mono text-muted-foreground">Topic: {cs.topic}</span>
+      </div>
+      <div class="flex items-center gap-1.5 text-xs font-mono text-muted-foreground">
+        <Clock class="size-3.5 text-primary" />
+        <span>{cs.readTime}</span>
+      </div>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] items-start">
+      <div class="flex flex-col justify-between gap-6 rounded-2xl bg-surface/60 p-6 border border-border/50 h-full">
+        <div>
+          <div class="text-[11px] font-mono uppercase tracking-widest text-muted-foreground font-semibold">Key Benchmark Outcome</div>
+          <div class="mt-2 font-display text-5xl sm:text-6xl font-bold text-foreground tracking-tight">{cs.statHighlight}</div>
+          <div class="mt-1 text-xs uppercase tracking-wider text-primary font-medium">{cs.statLabel}</div>
+        </div>
+
+        <div class="pt-4 border-t border-border/40">
+          <div class="flex items-center gap-1.5 text-xs font-mono uppercase text-muted-foreground mb-3 font-semibold">
+            <Sparkles class="size-3.5 text-primary" />
+            <span>Core Takeaways</span>
+          </div>
+          <ul class="space-y-2.5">
+            {cs.keyFindings.map((finding) => (
+              <li class="flex items-start gap-2 text-xs text-foreground/90 leading-relaxed font-medium">
+                <CheckCircle2 class="size-4 text-primary shrink-0 mt-0.5" />
+                <span>{finding}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {cs.techStack && (
+          <div class="pt-4 border-t border-border/40">
+            <div class="flex items-center gap-1.5 text-xs font-mono text-muted-foreground mb-2 font-semibold">
+              <Cpu class="size-3.5 text-primary" />
+              <span>Architecture Stack</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              {cs.techStack.map((tech) => (
+                <span class="rounded-md border border-border/60 bg-background px-2.5 py-1 text-[11px] font-mono text-muted-foreground">{tech}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div class="flex flex-col justify-between gap-6">
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-foreground leading-snug tracking-tight group-hover:text-primary transition-colors">
+            {cs.title}
+          </h2>
+          <div class="mt-4 rounded-xl bg-primary/5 border border-primary/15 p-4">
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-primary font-semibold mb-1">
+              <BookOpen class="size-4 text-primary" />
+              <span>Executive Summary</span>
+            </div>
+            <p class="text-xs sm:text-sm text-foreground/90 leading-relaxed">{cs.executiveSummary}</p>
+          </div>
+
+          <div class="mt-5 space-y-3">
+            <h3 class="text-xs font-mono uppercase tracking-wider text-muted-foreground font-semibold">Deep Structural Analysis</h3>
+            <p class="text-sm leading-relaxed text-muted-foreground">{cs.coreAnalysis}</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-border/60 bg-surface-card p-4 flex items-start gap-3">
+          <Lightbulb class="size-5 text-primary shrink-0 mt-0.5" />
+          <div>
+            <div class="text-xs font-mono uppercase tracking-wider text-primary font-semibold">Strategic Action Item</div>
+            <p class="mt-0.5 text-xs text-foreground/90 leading-relaxed font-medium">{cs.strategicTakeaway}</p>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-border/30 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <Search class="size-3.5 text-muted-foreground/60" />
+            <span class="text-[10px] font-mono uppercase text-muted-foreground/60 mr-1">Focus Areas:</span>
+            {cs.keywords.map((kw) => (
+              <span class="text-[11px] font-mono text-muted-foreground/80 bg-muted/30 px-2 py-0.5 rounded border border-border/40">#{kw}</span>
+            ))}
+          </div>
+
+          <a href="/contact" class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+            Consult On This Strategy
+            <ArrowRight class="ml-1.5 size-3.5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<style>
+  .case-study-item {
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+  .case-study-item.is-hidden {
+    display: none;
+  }
+  .case-study-item.is-entering {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+</style>

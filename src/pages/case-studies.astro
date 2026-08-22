@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/layout/PageHero.astro";
+import Section from "../components/layout/Section.astro";
+import CTASection from "../components/sections/home/CTASection.astro";
+import CaseStudyCard from "../components/sections/case-studies/CaseStudyCard.astro";
+import { CASE_STUDIES, CASE_STUDY_CATEGORIES } from "../data/site.js";
+---
+
+<Layout
+  title="Research Papers & Growth Blueprints — Nexora"
+  description="In-depth research papers & strategic growth blueprints: how Nexora architects AI automation, custom software, brand positioning, and performance growth systems."
+  ogTitle="Research Papers — Nexora"
+  ogDescription="Research-backed growth breakdowns, technical stack implementations, and strategic P&L insights."
+  canonicalPath="/case-studies"
+>
+  <PageHero eyebrow="Research & Strategy Papers">
+    Growth systems, <span class="text-gradient-primary italic">researched & engineered.</span>
+    <Fragment slot="lead">
+      In-depth research papers and architectural blueprints on brand positioning, high-performance web engineering,
+      AI automation leverage, and data telemetry.
+    </Fragment>
+  </PageHero>
+
+  <Section class="pt-2 pb-20">
+    <div data-reveal class="flex flex-wrap items-center justify-center gap-2 mb-14">
+      {CASE_STUDY_CATEGORIES.map((cat, i) => (
+        <button
+          type="button"
+          data-cs-filter={cat.key}
+          class:list={[
+            "cs-category-pill rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 border cursor-pointer select-none",
+            i === 0
+              ? "bg-primary text-primary-foreground border-primary shadow-sm is-active"
+              : "bg-surface/80 text-muted-foreground border-border hover:border-primary/40 hover:text-foreground",
+          ]}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <div id="case-study-list" class="flex flex-col gap-10">
+      {CASE_STUDIES.map((cs) => <CaseStudyCard cs={cs} />)}
+    </div>
+  </Section>
+
+  <CTASection />
+</Layout>
+
+<script>
+  function initCaseStudyFilters() {
+    const pills = document.querySelectorAll('[data-cs-filter]');
+    const items = document.querySelectorAll('.case-study-item');
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const category = pill.getAttribute('data-cs-filter');
+
+        pills.forEach((p) => {
+          const active = p === pill;
+          p.classList.toggle('is-active', active);
+          p.classList.toggle('bg-primary', active);
+          p.classList.toggle('text-primary-foreground', active);
+          p.classList.toggle('border-primary', active);
+          p.classList.toggle('shadow-sm', active);
+          p.classList.toggle('bg-surface/80', !active);
+          p.classList.toggle('text-muted-foreground', !active);
+          p.classList.toggle('border-border', !active);
+        });
+
+        items.forEach((item) => {
+          const matches = category === 'all' || item.getAttribute('data-category') === category;
+          if (matches) {
+            item.classList.remove('is-hidden');
+            item.classList.add('is-entering');
+            requestAnimationFrame(() => item.classList.remove('is-entering'));
+          } else {
+            item.classList.add('is-entering');
+            window.setTimeout(() => item.classList.add('is-hidden'), 350);
+          }
+        });
+      });
+    });
+  }
+
+  initCaseStudyFilters();
+</script>

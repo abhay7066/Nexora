@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/layout/PageHero.astro";
+import ServiceShowcase from "../components/sections/services/ServiceShowcase.astro";
+import Process from "../components/sections/services/Process.astro";
+import CTASection from "../components/sections/home/CTASection.astro";
+---
+
+<Layout
+  title="Services & Capabilities — Nexora"
+  description="Branding, high-performance web systems, custom SaaS, mobile apps, AI automation, and performance marketing — Nexora's practice areas."
+  ogTitle="Services & Capabilities — Nexora"
+  ogDescription="Integrated growth capabilities engineered as one system: brand, software, AI automation and performance marketing."
+  canonicalPath="/services"
+>
+  <PageHero eyebrow="Capabilities & Services">
+    Integrated growth capabilities. <span class="text-gradient-primary italic">One accountable system.</span>
+    <Fragment slot="lead">
+      Modular practices engineered to operate independently or compound as an end-to-end growth system.
+    </Fragment>
+  </PageHero>
+  <ServiceShowcase />
+  <Process />
+  <CTASection />
+</Layout>
