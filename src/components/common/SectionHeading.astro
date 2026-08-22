@@ -1,0 +1,30 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+interface Props {
+  eyebrow?: string;
+  align?: "left" | "center";
+  class?: string;
+}
+const { eyebrow, align = "left", class: className } = Astro.props;
+const hasLead = Astro.slots.has("lead");
+---
+
+<div
+  data-reveal
+  class:list={[
+    "flex flex-col gap-5 max-w-2xl",
+    align === "center" && "items-center text-center mx-auto",
+    className,
+  ]}
+>
+  {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+  <h2 class="text-gradient text-4xl leading-[1.05] sm:text-5xl md:text-[3.5rem]">
+    <slot />
+  </h2>
+  {hasLead && (
+    <p class="text-lg text-muted-foreground sm:text-xl">
+      <slot name="lead" />
+    </p>
+  )}
+</div>

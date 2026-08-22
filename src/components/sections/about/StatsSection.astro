@@ -1,0 +1,20 @@
+---
+import Section from "../../layout/Section.astro";
+import { STATS } from "../../../data/site.js";
+---
+
+<Section class="py-8">
+  <dl data-reveal-group class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {STATS.map((s) => (
+      <div class="surface-card flex flex-col justify-between h-full p-7 border border-border/60 hover:border-primary/30 transition-all duration-300">
+        <div class="flex flex-col gap-2">
+          <dt class="flex flex-col gap-2">
+            <span class="font-display text-4xl sm:text-5xl font-bold tracking-tight text-gradient-primary">{s.value}</span>
+            <span class="text-base font-semibold text-foreground tracking-tight leading-snug">{s.label}</span>
+          </dt>
+          <dd class="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">{s.detail}</dd>
+        </div>
+      </div>
+    ))}
+  </dl>
+</Section>

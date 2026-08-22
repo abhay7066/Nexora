@@ -1,0 +1,18 @@
+---
+// Dynamic icon-by-name lookup for data-driven content (services/values/process
+// steps store an icon name as a string). For a statically-known icon, prefer
+// importing it directly from 'lucide-astro' instead of going through this.
+import * as icons from "@lucide/astro";
+
+interface Props {
+  name: string;
+  class?: string;
+  size?: number | string;
+  strokeWidth?: number | string;
+}
+
+const { name, class: className, size, strokeWidth } = Astro.props;
+const IconComponent = icons[name];
+---
+
+{IconComponent && <IconComponent class={className} size={size} stroke-width={strokeWidth} />}

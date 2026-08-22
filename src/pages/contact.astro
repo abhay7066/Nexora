@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/layout/PageHero.astro";
+import Section from "../components/layout/Section.astro";
+import ContactForm from "../components/sections/contact/ContactForm.astro";
+import { Mail, MapPin, Phone } from "@lucide/astro";
+import { COMPANY } from "../data/site.js";
+---
+
+<Layout
+  title="Contact — Nexora"
+  description="Book a strategy call with Nexora — an AI-powered business growth company. We respond within one business day."
+  ogTitle="Contact — Nexora"
+  ogDescription="Book a 30-minute strategy call with our team."
+  canonicalPath="/contact"
+>
+  <PageHero eyebrow="Let's talk">
+    Book a <span class="text-gradient-primary italic">strategy call.</span>
+    <Fragment slot="lead">
+      Tell us where you're stuck and where you want to go. We'll come back with a working POV — usually within one
+      business day.
+    </Fragment>
+  </PageHero>
+
+  <Section>
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
+      <aside data-reveal-group class="flex flex-col gap-8">
+        <a href={`mailto:${COMPANY.email}`} class="flex items-start gap-4 transition-colors hover:text-primary">
+          <div class="grid size-10 shrink-0 place-items-center rounded-lg border border-border bg-surface text-primary">
+            <Mail class="size-5" />
+          </div>
+          <div>
+            <div class="text-xs uppercase tracking-widest text-muted-foreground">Email</div>
+            <div class="mt-1 text-base text-foreground">{COMPANY.email}</div>
+          </div>
+        </a>
+
+        <div class="flex items-start gap-4">
+          <div class="grid size-10 shrink-0 place-items-center rounded-lg border border-border bg-surface text-primary">
+            <MapPin class="size-5" />
+          </div>
+          <div>
+            <div class="text-xs uppercase tracking-widest text-muted-foreground">Where we work</div>
+            <div class="mt-1 text-base text-foreground">{COMPANY.location}</div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="grid size-10 shrink-0 place-items-center rounded-lg border border-border bg-surface text-primary">
+            <Phone class="size-5" />
+          </div>
+          <div>
+            <div class="text-xs uppercase tracking-widest text-muted-foreground">Response time</div>
+            <div class="mt-1 text-base text-foreground">Within 12 hours</div>
+          </div>
+        </div>
+
+        <div class="surface-card mt-4 p-6">
+          <p class="text-sm text-muted-foreground">
+            Prefer to skip the form? Email us directly and mention your business, stage and where you feel stuck.
+          </p>
+        </div>
+      </aside>
+      <ContactForm />
+    </div>
+  </Section>
+</Layout>

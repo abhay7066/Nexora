@@ -1,0 +1,77 @@
+{
+  "figma": {
+    "fileKey": "",
+    "pages": [],
+    "frames": {},
+    "styles": {
+      "colors": {},
+      "fonts": {},
+      "fontSizes": {},
+      "spacing": {}
+    },
+    "assets": {},
+    "note": "Content was ported verbatim from an existing production React build rather than scaffolded from a live Figma file in this session — see DESIGN.md and component header comments."
+  },
+  "contentCollections": {},
+  "integrations": {
+    "contactForm": { "configured": true, "method": "web3forms" },
+    "seo": { "configured": true },
+    "scrollReveal": {
+      "configured": true,
+      "mechanism": "shared IntersectionObserver in src/layouts/Layout.astro observing [data-reveal] / [data-reveal-group], threshold 0.25, respects prefers-reduced-motion",
+      "elementCount": "all primary sections + the services grid and case-studies list (completed 2026-08-22)"
+    },
+    "i18n": { "configured": false }
+  },
+  "components": {
+    "completed": [
+      "src/layouts/Layout.astro",
+      "src/components/layout/Header.astro",
+      "src/components/layout/Footer.astro",
+      "src/components/layout/Container.astro",
+      "src/components/layout/Section.astro",
+      "src/components/layout/PageHero.astro",
+      "src/components/layout/HeroBackground.astro",
+      "src/components/common/Logo.astro",
+      "src/components/common/Icon.astro",
+      "src/components/common/Eyebrow.astro",
+      "src/components/common/ArrowLink.astro",
+      "src/components/common/SectionHeading.astro",
+      "src/components/common/CursorTrail.astro",
+      "src/components/sections/home/Hero.astro",
+      "src/components/sections/home/GrowthChallenge.astro",
+      "src/components/sections/home/WhyNexora.astro",
+      "src/components/sections/home/CapabilitiesOverview.astro",
+      "src/components/sections/home/FoundationalCommitments.astro",
+      "src/components/sections/home/CTASection.astro",
+      "src/components/sections/about/StatsSection.astro",
+      "src/components/sections/about/ValuesSection.astro",
+      "src/components/sections/services/ServiceShowcase.astro",
+      "src/components/sections/services/AnimatedServiceCard.astro",
+      "src/components/sections/services/CapabilityModal.astro",
+      "src/components/sections/services/Process.astro",
+      "src/components/sections/case-studies/CaseStudyCard.astro",
+      "src/components/sections/contact/ContactForm.astro"
+    ],
+    "inProgress": "",
+    "pending": []
+  },
+  "pages": {
+    "completed": [
+      "/ (src/pages/index.astro)",
+      "/about (src/pages/about.astro)",
+      "/services (src/pages/services.astro)",
+      "/case-studies (src/pages/case-studies.astro)",
+      "/contact (src/pages/contact.astro)",
+      "/404 (src/pages/404.astro, noindex)"
+    ],
+    "pending": [],
+    "note": "No /industries, /insights routes exist — DESIGN.md's Pages table previously listed them as built; corrected 2026-08-22. /portfolio is a redirect to /services only (astro.config.mjs), not a real page — nav item is intentionally commented out in src/data/site.js."
+  },
+  "metadata": {
+    "projectName": "Nexora",
+    "gridWidth": "1660",
+    "createdAt": "2026-08-22T00:00:00.000Z",
+    "lastUpdated": "2026-08-22"
+  }
+}

@@ -1,0 +1,30 @@
+---
+import Container from "./Container.astro";
+import Eyebrow from "../common/Eyebrow.astro";
+
+interface Props {
+  eyebrow: string;
+}
+const { eyebrow } = Astro.props;
+const hasLead = Astro.slots.has("lead");
+---
+
+<section class="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10" style="background: var(--gradient-hero)"></div>
+  <div aria-hidden="true" class="grid-bg pointer-events-none absolute inset-0 -z-10"></div>
+  <Container>
+    <div class="max-w-3xl animate-fade-up">
+      <div class="animate-fade-up" style="animation-delay: 0ms">
+        <Eyebrow>{eyebrow}</Eyebrow>
+      </div>
+      <h1 class="text-gradient mt-6 text-5xl leading-[1.05] tracking-tight sm:text-6xl md:text-7xl animate-fade-up" style="animation-delay: 60ms">
+        <slot />
+      </h1>
+      {hasLead && (
+        <p class="mt-7 max-w-2xl text-lg text-muted-foreground sm:text-xl animate-fade-up" style="animation-delay: 120ms">
+          <slot name="lead" />
+        </p>
+      )}
+    </div>
+  </Container>
+</section>

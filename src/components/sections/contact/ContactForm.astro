@@ -1,0 +1,253 @@
+---
+import { ArrowRight, CheckCircle2, Loader2 } from "@lucide/astro";
+import { COMPANY } from "../../../data/site.js";
+---
+
+<div data-reveal class="contact-form-wrap">
+  <form
+    id="contact-form"
+    novalidate
+    class="surface-card flex flex-col gap-6 p-8 md:p-10 border border-border/60 hover:border-primary/20 transition-all duration-300"
+  >
+    <div class="grid gap-6 sm:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <label for="name" class="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+          Name<span class="ml-1 text-primary">*</span>
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          autocomplete="name"
+          placeholder="Your name"
+          class="h-11 rounded-md border border-border bg-background/50 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        />
+        <span data-error-for="name" class="hidden text-xs font-mono text-destructive"></span>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="email" class="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+          Email<span class="ml-1 text-primary">*</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          placeholder="Email address"
+          class="h-11 rounded-md border border-border bg-background/50 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        />
+        <span data-error-for="email" class="hidden text-xs font-mono text-destructive"></span>
+      </div>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <label for="phone" class="text-xs font-mono uppercase tracking-widest text-muted-foreground">Phone</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          placeholder="Mobile number"
+          class="h-11 rounded-md border border-border bg-background/50 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="company" class="text-xs font-mono uppercase tracking-widest text-muted-foreground">Company / Website</label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          autocomplete="organization"
+          placeholder="Company or domain"
+          class="h-11 rounded-md border border-border bg-background/50 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        />
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="message" class="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+        What are you looking to grow? <span class="text-primary">*</span>
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows="5"
+        required
+        placeholder="Tell us about your business stage, current tech stack, or the growth constraint you're feeling."
+        class="rounded-md border border-border bg-background/50 px-3 py-2 text-sm leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      ></textarea>
+      <span data-error-for="message" class="hidden text-xs font-mono text-destructive"></span>
+    </div>
+
+    <button
+      type="submit"
+      id="contact-submit"
+      class="mt-2 inline-flex h-12 items-center justify-center gap-1.5 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-70"
+    >
+      <span id="contact-submit-idle" class="flex items-center gap-1.5">
+        Request a Strategy Call
+        <ArrowRight class="size-4" />
+      </span>
+      <span id="contact-submit-loading" class="hidden items-center gap-2">
+        <Loader2 class="size-4 animate-spin" />
+        Submitting Request...
+      </span>
+    </button>
+
+    <p id="contact-error-note" class="hidden text-xs font-mono text-destructive text-center">
+      Something went wrong. Please email us directly at {COMPANY.email}.
+    </p>
+  </form>
+
+  <div id="contact-success" class="surface-card hidden flex-col items-center gap-4 p-12 text-center border border-primary/30 animate-fade-up">
+    <CheckCircle2 class="size-12 text-primary" />
+    <h2 class="font-display text-3xl font-bold text-foreground">Message Received!</h2>
+    <p class="max-w-md text-sm text-muted-foreground leading-relaxed">
+      Thank you for reaching out. A senior builder on our team will review your inquiry and get back to you within 12
+      hours.
+    </p>
+    <button
+      id="contact-reset"
+      type="button"
+      class="mt-4 rounded-full border border-border px-5 py-2 text-xs font-mono uppercase tracking-widest text-foreground transition-colors hover:border-primary hover:text-primary"
+    >
+      Send another message
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ webformsSubmitUrl: "https://api.web3forms.com/submit", accessKey: "db4bca53-dbfe-4d02-b0d7-df3eb6b33f6c" }}>
+  function showToast(variant, title, description) {
+    const root = document.getElementById('toast-root');
+    if (!root) return;
+    const toast = document.createElement('div');
+    toast.className = `glass toast-item toast-${variant} pointer-events-auto flex w-full flex-col gap-1 rounded-xl p-4 text-sm shadow-elevated sm:w-80`;
+    toast.innerHTML = `<strong class="font-display">${title}</strong>${description ? `<span class="text-xs text-muted-foreground">${description}</span>` : ''}`;
+    root.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('is-visible'));
+    window.setTimeout(() => {
+      toast.classList.remove('is-visible');
+      window.setTimeout(() => toast.remove(), 250);
+    }, 5000);
+  }
+
+  async function submitContact(payload) {
+    const formData = new FormData();
+    formData.append('access_key', accessKey);
+    formData.append('subject', `New strategy call request from ${payload.name}`);
+    formData.append('name', payload.name);
+    formData.append('email', payload.email);
+    formData.append('phone', payload.phone);
+    formData.append('company', payload.company);
+    formData.append('message', payload.message);
+
+    const response = await fetch(webformsSubmitUrl, { method: 'POST', body: formData });
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message ?? 'Failed to send message.');
+    }
+  }
+
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    const successPanel = document.getElementById('contact-success');
+    const submitBtn = document.getElementById('contact-submit');
+    const idleLabel = document.getElementById('contact-submit-idle');
+    const loadingLabel = document.getElementById('contact-submit-loading');
+    const errorNote = document.getElementById('contact-error-note');
+    const resetBtn = document.getElementById('contact-reset');
+    if (!(form instanceof HTMLFormElement) || !successPanel || !submitBtn) return;
+
+    const setFieldError = (name, message) => {
+      const el = form.querySelector(`[data-error-for="${name}"]`);
+      if (!el) return;
+      el.textContent = message ?? '';
+      el.classList.toggle('hidden', !message);
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ['name', 'email', 'message'].forEach((f) => setFieldError(f, null));
+      errorNote.classList.add('hidden');
+
+      const data = new FormData(form);
+      const name = String(data.get('name') ?? '').trim();
+      const email = String(data.get('email') ?? '').trim();
+      const phone = String(data.get('phone') ?? '').trim();
+      const company = String(data.get('company') ?? '').trim();
+      const message = String(data.get('message') ?? '').trim();
+
+      let hasError = false;
+      if (!name) {
+        setFieldError('name', 'Please enter your name.');
+        hasError = true;
+      }
+      if (!email || !/\S+@\S+\.\S+/.test(email)) {
+        setFieldError('email', 'Please enter a valid email.');
+        hasError = true;
+      }
+      if (!message) {
+        setFieldError('message', 'Please describe what you are looking to grow.');
+        hasError = true;
+      }
+
+      if (hasError) {
+        showToast('error', 'Please fill in all required fields.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      idleLabel.classList.add('hidden');
+      loadingLabel.classList.remove('hidden');
+      loadingLabel.classList.add('flex');
+
+      try {
+        await submitContact({ name, email, phone, company, message });
+        form.classList.add('hidden');
+        successPanel.classList.remove('hidden');
+        successPanel.classList.add('flex');
+        showToast('success', 'Strategy call requested!', 'We will review your project and get back to you within 12 hours.');
+        form.reset();
+      } catch {
+        errorNote.classList.remove('hidden');
+        showToast('error', 'Failed to send message.', 'Please check your network connection or email us directly.');
+      } finally {
+        submitBtn.disabled = false;
+        idleLabel.classList.remove('hidden');
+        loadingLabel.classList.add('hidden');
+        loadingLabel.classList.remove('flex');
+      }
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      successPanel.classList.add('hidden');
+      successPanel.classList.remove('flex');
+      form.classList.remove('hidden');
+    });
+  }
+
+  initContactForm();
+</script>
+
+<style>
+  .toast-item {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+  .toast-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .toast-success strong {
+    color: var(--foreground);
+  }
+  .toast-error strong {
+    color: var(--destructive);
+  }
+</style>

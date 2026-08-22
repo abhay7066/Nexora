@@ -1,0 +1,27 @@
+---
+import Section from "../../layout/Section.astro";
+import SectionHeading from "../../common/SectionHeading.astro";
+import Icon from "../../common/Icon.astro";
+import { VALUES } from "../../../data/site.js";
+---
+
+<Section>
+  <SectionHeading eyebrow="What we stand for">
+    Six principles that <span class="text-gradient-primary italic">shape every engagement.</span>
+    <Fragment slot="lead">
+      Not values on a wall. Operating principles we hire against, review quarterly, and fire ourselves against.
+    </Fragment>
+  </SectionHeading>
+
+  <ul data-reveal-group class="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {VALUES.map((v) => (
+      <li class="surface-card group flex h-full flex-col gap-5 p-8 transition-colors hover:border-primary/30">
+        <div class="grid size-11 place-items-center rounded-lg border border-border bg-surface text-primary">
+          <Icon name={v.icon} class="size-5" />
+        </div>
+        <h3 class="font-display text-2xl text-foreground">{v.title}</h3>
+        <p class="text-sm leading-relaxed text-muted-foreground">{v.description}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

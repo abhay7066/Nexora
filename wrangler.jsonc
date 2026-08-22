@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nexora-astro",
+  "compatibility_date": "2026-08-22",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  // Old Nitro/TanStack Start Worker's route was retired first, then these were added
+  // in the dashboard on 2026-08-22 to avoid a routing conflict. Mirrored here so a
+  // future `wrangler deploy` matches the dashboard instead of drifting from it.
+  "routes": [
+    { "pattern": "nexoratech.biz", "custom_domain": true },
+    { "pattern": "*.nexoratech.biz/*", "zone_name": "nexoratech.biz" }
+  ]
+}

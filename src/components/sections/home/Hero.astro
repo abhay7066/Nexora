@@ -1,0 +1,45 @@
+---
+import Container from "../../layout/Container.astro";
+import HeroBackground from "../../layout/HeroBackground.astro";
+import { Sparkles, ArrowRight } from "@lucide/astro";
+---
+
+<section class="relative isolate overflow-hidden pt-32 pb-16 sm:pt-36 sm:pb-20">
+  <HeroBackground />
+  <Container>
+    <div class="mx-auto flex max-w-4xl flex-col items-center text-center">
+      <span class="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted-foreground">
+        <Sparkles class="size-3.5 text-primary" />
+        AI-powered business growth, all under one roof
+      </span>
+
+      <h1
+        class="animate-fade-up text-gradient text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.25rem]"
+        style="animation-delay: 60ms"
+      >
+        We help ambitious businesses <span class="text-gradient-primary italic">grow.</span>
+      </h1>
+
+      <p class="animate-fade-up mt-7 max-w-2xl text-lg text-muted-foreground sm:text-xl" style="animation-delay: 120ms">
+        We combine branding, software, AI automation and performance marketing into one growth system—built to help
+        ambitious businesses scale with clarity and confidence.
+      </p>
+
+      <div class="animate-fade-up mt-10 flex flex-wrap items-center justify-center gap-3" style="animation-delay: 180ms">
+        <a
+          href="/contact"
+          class="hover-lift inline-flex h-12 items-center justify-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          Book a strategy call
+          <ArrowRight class="ml-1 size-4" />
+        </a>
+        <a
+          href="/services"
+          class="hover-lift inline-flex h-12 items-center justify-center rounded-full border border-border px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+        >
+          Explore services
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>

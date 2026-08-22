@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/layout/PageHero.astro";
+import StatsSection from "../components/sections/about/StatsSection.astro";
+import ValuesSection from "../components/sections/about/ValuesSection.astro";
+import CTASection from "../components/sections/home/CTASection.astro";
+---
+
+<Layout
+  title="About — Nexora"
+  description="Nexora is an AI-powered business growth company. Meet the operators behind the work."
+  ogTitle="About — Nexora"
+  ogDescription="An AI-powered growth partner built by operators — brand, software, automation and marketing under one roof."
+  canonicalPath="/about"
+>
+  <PageHero eyebrow="About Nexora">
+    Operators, not vendors. <span class="text-gradient-primary italic">Partners, not projects.</span>
+    <Fragment slot="lead">
+      We were tired of watching great businesses stall because their branding, software, marketing and automation
+      lived in four different rooms. Nexora exists to put them in one.
+    </Fragment>
+  </PageHero>
+  <StatsSection />
+  <ValuesSection />
+  <CTASection />
+</Layout>

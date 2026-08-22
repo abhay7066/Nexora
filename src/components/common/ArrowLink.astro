@@ -1,0 +1,14 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+
+interface Props {
+  href: string;
+  class?: string;
+}
+const { href, class: className } = Astro.props;
+---
+
+<a href={href} class:list={["group inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary", className]}>
+  <slot />
+  <ArrowUpRight class="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+</a>
