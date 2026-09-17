@@ -16,7 +16,7 @@ export const COMPANY = {
   tagline: "AI-Powered Business Growth Company",
   description:
     "We help ambitious businesses grow with Branding, Software Development, AI Automation and Performance Marketing—all under one roof.",
-  email: "nexora7778@gmail.com",
+  email: "nexoratech.connect@gmail.com",
   phone: "+91 93278 41812",
   phoneHref: "tel:+919327841812",
   location: "Global · Remote-first",
