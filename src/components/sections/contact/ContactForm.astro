@@ -1,6 +1,8 @@
 ---
 import { ArrowRight, CheckCircle2, Loader2 } from "@lucide/astro";
 import { COMPANY } from "../../../data/site.js";
+
+const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 ---
 
 <div data-reveal class="contact-form-wrap">
@@ -119,7 +121,7 @@ import { COMPANY } from "../../../data/site.js";
   </div>
 </div>
 
-<script define:vars={{ webformsSubmitUrl: "https://api.web3forms.com/submit", accessKey: "db4bca53-dbfe-4d02-b0d7-df3eb6b33f6c" }}>
+<script define:vars={{ webformsSubmitUrl: "https://api.web3forms.com/submit", accessKey: web3formsAccessKey }}>
   function showToast(variant, title, description) {
     const root = document.getElementById('toast-root');
     if (!root) return;
