@@ -1,0 +1,163 @@
+---
+import Section from "../../layout/Section.astro";
+import SectionHeading from "../../common/SectionHeading.astro";
+import { ArrowRight, Bot, Cpu, Database, CheckCircle2, QrCode, Sparkles, Zap, ShieldCheck } from "@lucide/astro";
+---
+
+<Section class="border-t border-border/40">
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] items-center">
+    <div data-reveal class="flex flex-col">
+      <SectionHeading eyebrow="The Nexora Ecosystem Flywheel">
+        Software that <span class="text-gradient-primary">compounds together.</span>
+        <Fragment slot="lead">
+          Our products aren't isolated experiments. They share our high-throughput infrastructure, unified design
+          tokens, and battle-tested operational playbooks.
+        </Fragment>
+      </SectionHeading>
+
+      <div data-reveal-group class="mt-8 flex flex-col gap-4">
+        <div class="surface-card flex items-start gap-4 p-5 sm:p-6 border border-border/60 rounded-2xl">
+          <div class="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20 shrink-0">
+            <Zap class="size-5" />
+          </div>
+          <div>
+            <h3 class="font-display text-base font-semibold text-foreground">
+              nexConnect Powers Playcific's Messaging
+            </h3>
+            <p class="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              When a player reserves a turf on <strong>Playcific</strong>, <strong>nexConnect</strong> executes
+              sub-50ms WhatsApp Cloud API dispatches to deliver dynamic QR access passes and live booking receipts.
+            </p>
+          </div>
+        </div>
+
+        <div class="surface-card flex items-start gap-4 p-5 sm:p-6 border border-border/60 rounded-2xl">
+          <div class="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20 shrink-0">
+            <ShieldCheck class="size-5" />
+          </div>
+          <div>
+            <h3 class="font-display text-base font-semibold text-foreground">
+              Shared Enterprise Security & Telemetry
+            </h3>
+            <p class="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              Both platforms share our hardened security posture: cryptographic HMAC API keys, RabbitMQ queue
+              resilience, automated database migrations, and real-time P&L observability.
+            </p>
+          </div>
+        </div>
+
+        <div class="surface-card flex items-start gap-4 p-5 sm:p-6 border border-border/60 rounded-2xl">
+          <div class="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20 shrink-0">
+            <Sparkles class="size-5" />
+          </div>
+          <div>
+            <h3 class="font-display text-base font-semibold text-foreground">
+              The Venture Advantage for Clients
+            </h3>
+            <p class="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              When you hire Nexora to build your software or AI systems, you get the battle-tested codebases,
+              architectures, and operational learnings from products that already serve real businesses and consumers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Visual Architecture Connection Card -->
+    <div
+      data-reveal
+      class="surface-card relative flex flex-col justify-between p-8 sm:p-10 border border-border/70 hover:border-primary/50 transition-all duration-500 rounded-3xl overflow-hidden shadow-elevated"
+    >
+      <div class="absolute inset-0 grid-bg opacity-30"></div>
+
+      <div class="relative z-10 flex items-center justify-between border-b border-border/40 pb-5">
+        <span class="text-xs font-mono uppercase tracking-widest text-primary font-semibold">Live Integration Loop</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-mono text-muted-foreground">
+          <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Synchronous Event Flow
+        </span>
+      </div>
+
+      <!-- Diagram Nodes -->
+      <div class="relative z-10 my-8 flex flex-col gap-6">
+        <!-- Node 1: Playcific -->
+        <div class="rounded-2xl border border-border/70 bg-background/80 p-5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <img
+              src="/images/products/playcific-icon.webp"
+              alt="Playcific"
+              width="44"
+              height="44"
+              class="size-11 rounded-xl border border-border object-cover"
+              loading="lazy"
+            />
+            <div>
+              <div class="font-display text-base font-bold text-foreground">Playcific</div>
+              <div class="text-xs text-muted-foreground font-mono">Slot Confirmed by Venue Owner</div>
+            </div>
+          </div>
+          <span class="text-[11px] font-mono bg-primary/10 text-primary border border-primary/20 px-2.5 py-1 rounded-full">
+            Inbound Booking Event
+          </span>
+        </div>
+
+        <!-- Connection Arrow -->
+        <div class="flex flex-col items-center justify-center -my-3">
+          <div class="h-6 w-0.5 bg-primary/40 animate-pulse"></div>
+          <div class="rounded-full bg-surface border border-primary/30 px-3 py-1 text-[11px] font-mono text-primary flex items-center gap-1 shadow-sm">
+            <span>REST API Payload · HMAC Signed</span>
+          </div>
+          <div class="h-6 w-0.5 bg-primary/40 animate-pulse"></div>
+        </div>
+
+        <!-- Node 2: nexConnect -->
+        <div class="rounded-2xl border border-border/70 bg-background/80 p-5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20">
+              <Bot class="size-5" />
+            </div>
+            <div>
+              <div class="font-display text-base font-bold text-foreground">nexConnect</div>
+              <div class="text-xs text-muted-foreground font-mono">Meta WhatsApp Cloud Dispatch</div>
+            </div>
+          </div>
+          <span class="text-[11px] font-mono bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 px-2.5 py-1 rounded-full">
+            &lt; 50ms Delivery
+          </span>
+        </div>
+
+        <!-- Connection Arrow -->
+        <div class="flex flex-col items-center justify-center -my-3">
+          <div class="h-6 w-0.5 bg-primary/40 animate-pulse"></div>
+          <div class="rounded-full bg-surface border border-primary/30 px-3 py-1 text-[11px] font-mono text-primary flex items-center gap-1 shadow-sm">
+            <span>WhatsApp QR Ticket Delivered</span>
+          </div>
+          <div class="h-6 w-0.5 bg-primary/40 animate-pulse"></div>
+        </div>
+
+        <!-- Node 3: Player Gate Entry -->
+        <div class="rounded-2xl border border-border/70 bg-background/80 p-5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20">
+              <QrCode class="size-5" />
+            </div>
+            <div>
+              <div class="font-display text-base font-bold text-foreground">Player Gate Check-In</div>
+              <div class="text-xs text-muted-foreground font-mono">Zero WhatsApp Chaos · Instant Access</div>
+            </div>
+          </div>
+          <span class="text-[11px] font-mono bg-primary/10 text-primary border border-primary/20 px-2.5 py-1 rounded-full">
+            Verified Pass
+          </span>
+        </div>
+      </div>
+
+      <div class="relative z-10 pt-4 border-t border-border/40 flex items-center justify-between text-xs font-mono text-muted-foreground">
+        <span>Architected by Nexora</span>
+        <a href="/contact" class="text-primary font-semibold hover:underline">
+          Build With Our Team →
+        </a>
+      </div>
+    </div>
+  </div>
+</Section>

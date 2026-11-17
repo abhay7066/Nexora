@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/layout/PageHero.astro";
+import Section from "../components/layout/Section.astro";
+import ProductCard from "../components/sections/products/ProductCard.astro";
+import EcosystemFlywheel from "../components/sections/products/EcosystemFlywheel.astro";
+import CTASection from "../components/sections/home/CTASection.astro";
+import { PRODUCTS } from "../data/site.js";
+---
+
+<Layout
+  title="Products & Ecosystem — Nexora"
+  description="Explore Nexora's proprietary software platforms: nexConnect (Enterprise CPaaS & Telecom DLT Messaging) and Playcific (Sports Facility Discovery & Turf Booking App)."
+  ogTitle="Products & Ecosystem — Nexora"
+  ogDescription="Proprietary software platforms engineered, battle-tested, and operated by Nexora."
+  canonicalPath="/products"
+>
+  <PageHero eyebrow="Proprietary Software & Ecosystem">
+    Software built, battle-tested, and scaled by <span class="text-gradient-primary italic">Nexora.</span>
+    <Fragment slot="lead">
+      We don't just build client projects. We engineer, deploy, and operate our own proprietary software products and
+      consumer platforms — proving our engineering playbooks under continuous production load.
+    </Fragment>
+  </PageHero>
+
+  <!-- Flagship Products Showcase -->
+  <Section class="pt-10 pb-16">
+    <div class="flex flex-col gap-12">
+      {PRODUCTS.map((product, index) => (
+        <ProductCard product={product} index={index} />
+      ))}
+    </div>
+  </Section>
+
+  <!-- Compounding Synergy Flywheel -->
+  <EcosystemFlywheel />
+
+  <!-- Global Action Block -->
+  <CTASection />
+</Layout>

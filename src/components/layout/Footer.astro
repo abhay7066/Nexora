@@ -1,28 +1,44 @@
 ---
 import Logo from "../common/Logo.astro";
-import { COMPANY, NAV_ITEMS, SERVICES } from "../../data/site.js";
+import { COMPANY, NAV_ITEMS, SERVICES, PRODUCTS } from "../../data/site.js";
 
 const currentYear = new Date().getFullYear();
 const serviceLinks = SERVICES.map((s) => ({ label: s.title, to: "/services" }));
+const productLinks = PRODUCTS.map((p) => ({
+  label: p.name,
+  to: p.externalUrl ?? "/products",
+  isExternal: !!p.externalUrl,
+}));
 ---
 
 <footer class="border-t border-border">
-  <div class="container-page grid gap-12 py-16 lg:grid-cols-4">
-    <div class="flex flex-col gap-4">
+  <div class="container-page grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-5">
+    <div class="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
       <Logo />
       <p class="max-w-xs text-sm text-muted-foreground">{COMPANY.description}</p>
     </div>
 
     <div class="flex flex-col gap-3">
-      <h3 class="text-xs font-medium uppercase tracking-widest text-muted-foreground">Company</h3>
+      <h3 class="text-xs font-medium uppercase tracking-widest text-muted-foreground">Products</h3>
       <ul class="flex flex-col gap-2">
-        {NAV_ITEMS.map((item) => (
+        {productLinks.map((link) => (
           <li>
-            <a href={item.to} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              {item.label}
+            <a
+              href={link.to}
+              target={link.isExternal ? "_blank" : undefined}
+              rel={link.isExternal ? "noopener noreferrer" : undefined}
+              class="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <span>{link.label}</span>
+              {link.isExternal && <span class="text-[10px] text-muted-foreground/70 font-mono">↗</span>}
             </a>
           </li>
         ))}
+        <li>
+          <a href="/products" class="text-xs font-mono text-primary font-medium transition-colors hover:underline">
+            All Products & Ecosystem →
+          </a>
+        </li>
       </ul>
     </div>
 
@@ -33,6 +49,19 @@ const serviceLinks = SERVICES.map((s) => ({ label: s.title, to: "/services" }));
           <li>
             <a href={link.to} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
               {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <h3 class="text-xs font-medium uppercase tracking-widest text-muted-foreground">Company</h3>
+      <ul class="flex flex-col gap-2">
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a href={item.to} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              {item.label}
             </a>
           </li>
         ))}
