@@ -1,0 +1,61 @@
+{
+  "name": "Nexora",
+  "domain": "https://nexoratech.biz",
+  "framework": "Astro 6.3.0",
+  "styling": "Tailwind CSS v4",
+  "integrations": {
+    "sitemap": {
+      "configured": true,
+      "routes": [
+        "/",
+        "/products",
+        "/services",
+        "/about",
+        "/case-studies",
+        "/contact"
+      ]
+    },
+    "contactForm": {
+      "configured": true,
+      "provider": "Web3Forms",
+      "accessKey": "db4bca53-dbfe-4d02-b0d7-df3eb6b33f6c"
+    },
+    "products": {
+      "configured": true,
+      "count": 2,
+      "items": [
+        {
+          "slug": "nexconnect",
+          "name": "nexConnect",
+          "category": "Communication Infrastructure",
+          "type": "Enterprise CPaaS / Telecom DLT",
+          "backend": "Java 21 / Spring Boot / PostgreSQL / RabbitMQ",
+          "externalUrl": "https://nexconnect.nexoratech.biz/",
+          "status": "Live in Production"
+        },
+        {
+          "slug": "playcific",
+          "name": "Playcific",
+          "category": "Sports Venue & Slot Booking App",
+          "type": "Consumer & Venue Mobile/Web Platform",
+          "externalUrl": "https://www.playcific.in/",
+          "status": "Live in Production"
+        }
+      ]
+    }
+  },
+  "pages": [
+    { "route": "/", "astroFile": "src/pages/index.astro", "status": "built" },
+    { "route": "/products", "astroFile": "src/pages/products.astro", "status": "built" },
+    { "route": "/services", "astroFile": "src/pages/services.astro", "status": "built" },
+    { "route": "/about", "astroFile": "src/pages/about.astro", "status": "built" },
+    { "route": "/case-studies", "astroFile": "src/pages/case-studies.astro", "status": "built" },
+    { "route": "/contact", "astroFile": "src/pages/contact.astro", "status": "built" },
+    { "route": "/404", "astroFile": "src/pages/404.astro", "status": "built" }
+  ],
+  "components": [
+    { "name": "ProductCard", "astroFile": "src/components/sections/products/ProductCard.astro", "status": "built" },
+    { "name": "EcosystemFlywheel", "astroFile": "src/components/sections/products/EcosystemFlywheel.astro", "status": "built" },
+    { "name": "ProductsSpotlight", "astroFile": "src/components/sections/home/ProductsSpotlight.astro", "status": "built" }
+  ]
+}

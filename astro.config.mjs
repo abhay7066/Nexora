@@ -23,6 +23,7 @@ export default defineConfig({
       serialize(item) {
         const priorities = {
           [`${siteUrl}/`]: { changefreq: 'weekly', priority: 1.0 },
+          [`${siteUrl}/products`]: { changefreq: 'weekly', priority: 0.9 },
           [`${siteUrl}/services`]: { changefreq: 'monthly', priority: 0.9 },
           [`${siteUrl}/about`]: { changefreq: 'monthly', priority: 0.8 },
           [`${siteUrl}/case-studies`]: { changefreq: 'monthly', priority: 0.8 },

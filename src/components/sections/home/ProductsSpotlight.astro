@@ -1,0 +1,114 @@
+---
+import Section from "../../layout/Section.astro";
+import SectionHeading from "../../common/SectionHeading.astro";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Cpu, ExternalLink, Radio, Sparkles } from "@lucide/astro";
+import { PRODUCTS } from "../../../data/site.js";
+---
+
+<Section class="border-t border-border/40">
+  <div class="flex flex-wrap items-end justify-between gap-6">
+    <SectionHeading eyebrow="Proprietary Products">
+      Battle-tested in production. <span class="text-gradient-primary">Built by Nexora.</span>
+      <Fragment slot="lead">
+        We test our engineering and growth playbooks on our own proprietary SaaS platforms and consumer ventures before
+        we ever deploy them for partners.
+      </Fragment>
+    </SectionHeading>
+
+    <a
+      href="/products"
+      class="hover-lift inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+    >
+      <span>Explore All Products & Architecture</span>
+      <ArrowRight class="size-3.5" />
+    </a>
+  </div>
+
+  <div data-reveal-group class="mt-14 grid gap-8 md:grid-cols-2">
+    {PRODUCTS.map((product) => (
+      <div class="surface-card group relative flex flex-col justify-between p-8 sm:p-9 border border-border/70 hover:border-primary/50 transition-all duration-300 rounded-2xl select-none">
+        <div
+          aria-hidden="true"
+          class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl"
+        ></div>
+
+        <div>
+          <div class="flex items-center justify-between gap-3 mb-6">
+            <div class="flex items-center gap-3">
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  width="44"
+                  height="44"
+                  class="size-11 rounded-xl border border-border object-cover shrink-0"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary border border-primary/20 shrink-0">
+                  <Radio class="size-5" />
+                </div>
+              )}
+              <div>
+                <span class="rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-[10px] font-mono text-primary font-semibold">
+                  {product.category}
+                </span>
+                <h3 class="font-display text-2xl font-bold text-foreground group-hover:text-primary transition-colors tracking-tight mt-1">
+                  {product.name}
+                </h3>
+              </div>
+            </div>
+
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground bg-surface border border-border/60 px-2.5 py-1 rounded-full">
+              <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Live
+            </span>
+          </div>
+
+          <p class="text-sm font-medium text-primary mb-2">{product.tagline}</p>
+          <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed">{product.shortDesc}</p>
+
+          <div class="mt-6 flex flex-col gap-2 pt-4 border-t border-border/40">
+            {product.highlights.slice(0, 2).map((h) => (
+              <div class="flex items-center gap-2 text-xs text-foreground/90 font-medium">
+                <CheckCircle2 class="size-3.5 text-primary shrink-0" />
+                <span>{h.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-border/40 flex items-center justify-between gap-3">
+          <div class="flex flex-wrap gap-1.5">
+            {product.techStack.slice(0, 3).map((tech) => (
+              <span class="rounded-md border border-border/60 bg-background px-2 py-0.5 text-[10px] font-mono text-muted-foreground">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div class="flex items-center gap-2">
+            {product.externalUrl ? (
+              <a
+                href={product.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover-lift inline-flex items-center gap-1 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground transition-all hover:bg-primary/90"
+              >
+                <span>Live App</span>
+                <ArrowUpRight class="size-3" />
+              </a>
+            ) : null}
+            <a
+              href={`/products#${product.slug}`}
+              class="hover-lift inline-flex items-center gap-1 rounded-full border border-border px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-primary/40"
+            >
+              <span>Details</span>
+              <ArrowRight class="size-3" />
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>

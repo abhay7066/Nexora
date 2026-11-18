@@ -1,9 +1,10 @@
 ---
-import { Phone, Menu, X } from "@lucide/astro";
+import { Phone, Menu, X, ChevronDown, ArrowUpRight, ArrowRight, Radio } from "@lucide/astro";
 import Logo from "../common/Logo.astro";
-import { COMPANY, NAV_ITEMS } from "../../data/site.js";
+import { COMPANY, NAV_ITEMS, PRODUCTS } from "../../data/site.js";
 
 const currentPath = new URL(Astro.request.url).pathname;
+const isProductsActive = currentPath === "/products" || currentPath.startsWith("/products/");
 ---
 
 <header id="site-header" class="fixed inset-x-0 top-0 z-50">
@@ -11,8 +12,120 @@ const currentPath = new URL(Astro.request.url).pathname;
     <div class="container-page flex h-16 items-center justify-between gap-6">
       <Logo imgClassName="size-[62px]" />
 
+      <!-- Desktop Navigation with Interactive Products Popover -->
       <nav aria-label="Primary" class="hidden items-center gap-1 lg:flex">
         {NAV_ITEMS.map((item) => {
+          if (item.to === "/products") {
+            return (
+              <div class="relative" id="products-dropdown-container">
+                <button
+                  type="button"
+                  id="products-menu-toggle"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-controls="products-popover"
+                  class:list={[
+                    "relative flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors cursor-pointer select-none after:content-[''] after:absolute after:bottom-0.5 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-300 hover:text-foreground hover:after:w-5",
+                    isProductsActive ? "text-foreground after:w-5" : "text-muted-foreground",
+                  ]}
+                >
+                  <span>Products</span>
+                  <ChevronDown
+                    id="products-chevron"
+                    class="size-3.5 transition-transform duration-300 text-muted-foreground group-hover:text-foreground"
+                  />
+                </button>
+
+                <!-- Interactive Products Popover (Stripe/Vercel Style) -->
+                <div
+                  id="products-popover"
+                  role="menu"
+                  aria-label="Nexora Products"
+                  class="glass-strong absolute top-full mt-2.5 w-[520px] max-w-[calc(100vw-2rem)] rounded-2xl border border-border/80 p-5 shadow-elevated z-50"
+                >
+                  <div class="flex items-center justify-between border-b border-border/40 pb-3 mb-3">
+                    <span class="text-[11px] font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+                      Proprietary Software Suite
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                      <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Live in Production
+                    </span>
+                  </div>
+
+                  <!-- Products Grid: Direct Jumps to Live Apps -->
+                  <div class="grid gap-3 sm:grid-cols-2">
+                    {PRODUCTS.map((prod) => (
+                      <a
+                        href={prod.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group/item surface-card hover-lift flex flex-col justify-between p-4 rounded-xl border border-border/60 hover:border-primary/50 transition-all duration-300 bg-surface/50 hover:bg-surface"
+                      >
+                        <div>
+                          <div class="flex items-center justify-between gap-2 mb-2.5">
+                            <div class="flex items-center gap-2.5">
+                              {prod.image ? (
+                                <img
+                                  src={prod.image}
+                                  alt={prod.name}
+                                  width="36"
+                                  height="36"
+                                  class="size-9 rounded-lg border border-border object-cover shrink-0 shadow-sm"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <div class="grid size-9 place-items-center rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0">
+                                  <Radio class="size-4" />
+                                </div>
+                              )}
+                              <div>
+                                <div class="font-display text-base font-bold text-foreground group-hover/item:text-primary transition-colors flex items-center gap-1.5">
+                                  <span>{prod.name}</span>
+                                </div>
+                                <span class="text-[10px] font-mono uppercase text-muted-foreground">
+                                  {prod.category}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div class="grid size-7 place-items-center rounded-full bg-background/80 border border-border/60 text-muted-foreground group-hover/item:border-primary/40 group-hover/item:text-primary transition-all">
+                              <ArrowUpRight class="size-3.5 transition-transform group-hover/item:-translate-y-0.5 group-hover/item:translate-x-0.5" />
+                            </div>
+                          </div>
+
+                          <p class="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                            {prod.shortDesc}
+                          </p>
+                        </div>
+
+                        <div class="mt-3 pt-2.5 border-t border-border/30 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+                          <span class="text-primary font-medium group-hover/item:underline">
+                            Launch App ↗
+                          </span>
+                          <span class="text-[10px] text-muted-foreground/60">Live Platform</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+
+                  <!-- Footer: View Complete Ecosystem & Architecture Page -->
+                  <div class="mt-4 pt-3 border-t border-border/40 flex items-center justify-between">
+                    <a
+                      href="/products"
+                      id="products-view-all"
+                      class="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      <span>View Full Architecture & Ecosystem</span>
+                      <ArrowRight class="size-3.5 text-primary" />
+                    </a>
+                    <span class="text-[10px] font-mono text-muted-foreground">2 Active Platforms</span>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
           const isActive = currentPath === item.to;
           return (
             <a
@@ -28,6 +141,7 @@ const currentPath = new URL(Astro.request.url).pathname;
         })}
       </nav>
 
+      <!-- Desktop Contact Actions -->
       <div class="hidden items-center gap-3 lg:flex">
         <a
           href={COMPANY.phoneHref}
@@ -44,6 +158,7 @@ const currentPath = new URL(Astro.request.url).pathname;
         </a>
       </div>
 
+      <!-- Mobile Hamburger Header -->
       <div class="flex items-center gap-2 lg:hidden">
         <a
           href="/contact"
@@ -66,21 +181,70 @@ const currentPath = new URL(Astro.request.url).pathname;
     </div>
   </div>
 
+  <!-- Mobile Drawer Menu -->
   <div id="mobile-panel" class="glass fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto lg:hidden" hidden>
     <nav aria-label="Mobile" class="container-page flex flex-col gap-1 py-6">
-      {NAV_ITEMS.map((item) => (
-        <a
-          href={item.to}
-          data-mobile-link
-          class="rounded-md px-3 py-4 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
-        >
-          {item.label}
-        </a>
-      ))}
+      {NAV_ITEMS.map((item) => {
+        if (item.to === "/products") {
+          return (
+            <div class="rounded-xl border border-border/60 bg-surface/40 p-3 my-1">
+              <div class="flex items-center justify-between px-2 py-1.5">
+                <span class="text-xs font-mono uppercase tracking-widest text-primary font-semibold">
+                  Products
+                </span>
+                <a href="/products" data-mobile-link class="text-xs font-mono text-muted-foreground hover:text-foreground">
+                  View Ecosystem →
+                </a>
+              </div>
+              <div class="mt-2 flex flex-col gap-2">
+                {PRODUCTS.map((prod) => (
+                  <a
+                    href={prod.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-between p-2.5 rounded-lg bg-background/60 border border-border/40 hover:border-primary/40 text-foreground"
+                  >
+                    <div class="flex items-center gap-2.5">
+                      {prod.image ? (
+                        <img
+                          src={prod.image}
+                          alt={prod.name}
+                          width="28"
+                          height="28"
+                          class="size-7 rounded-md object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <Radio class="size-4 text-primary" />
+                      )}
+                      <div>
+                        <div class="text-sm font-semibold leading-tight">{prod.name}</div>
+                        <div class="text-[10px] text-muted-foreground font-mono">{prod.category}</div>
+                      </div>
+                    </div>
+                    <ArrowUpRight class="size-4 text-muted-foreground" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <a
+            href={item.to}
+            data-mobile-link
+            class="rounded-md px-3 py-3 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+          >
+            {item.label}
+          </a>
+        );
+      })}
+
       <a
         href={COMPANY.phoneHref}
         data-mobile-link
-        class="mt-2 flex items-center gap-2 rounded-md px-3 py-4 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+        class="mt-2 flex items-center gap-2 rounded-md px-3 py-3 text-lg text-muted-foreground hover:bg-muted hover:text-foreground"
       >
         <Phone class="size-4" />
         {COMPANY.phone}
@@ -112,8 +276,33 @@ const currentPath = new URL(Astro.request.url).pathname;
     }
   }
 
-  /* New: a real open/close transition for the mobile panel (the live site
-     has none — this is a deliberate "good animations on mobile" addition). */
+  /* Products popover positioning & animation */
+  #products-popover {
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px) scale(0.97);
+    transform-origin: top center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.22s var(--ease-out-expo),
+      transform 0.22s var(--ease-out-expo),
+      visibility 0.22s;
+  }
+
+  #products-popover.is-open {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  #products-menu-toggle[aria-expanded="true"] #products-chevron {
+    transform: rotate(180deg);
+    color: var(--color-foreground);
+  }
+
+  /* Mobile panel transition */
   #mobile-panel {
     opacity: 0;
     transform: translateY(-8px);
@@ -139,39 +328,95 @@ const currentPath = new URL(Astro.request.url).pathname;
     const toggle = document.getElementById('mobile-menu-toggle');
     const iconOpen = document.getElementById('mobile-menu-icon-open');
     const iconClose = document.getElementById('mobile-menu-icon-close');
-    if (!headerBar || !panel || !toggle || !iconOpen || !iconClose) return;
 
-    const onScroll = () => {
-      headerBar.classList.toggle('is-scrolled', window.scrollY > 8);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    // Products Popover Elements
+    const productsToggle = document.getElementById('products-menu-toggle');
+    const productsPopover = document.getElementById('products-popover');
+    const productsContainer = document.getElementById('products-dropdown-container');
 
-    let open = false;
-    const setOpen = (next) => {
-      open = next;
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      iconOpen.classList.toggle('hidden', open);
-      iconClose.classList.toggle('hidden', !open);
-      document.body.style.overflow = open ? 'hidden' : '';
+    // Header scroll background
+    if (headerBar) {
+      const onScroll = () => {
+        headerBar.classList.toggle('is-scrolled', window.scrollY > 8);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
 
-      if (open) {
-        panel.hidden = false;
-        // Force layout so the transition runs from the [hidden] initial state.
-        requestAnimationFrame(() => panel.classList.add('is-open'));
-      } else {
-        panel.classList.remove('is-open');
-        window.setTimeout(() => {
-          if (!open) panel.hidden = true;
-        }, 250);
-      }
-    };
+    // Products Popover Interaction
+    if (productsToggle && productsPopover && productsContainer) {
+      let isPopoverOpen = false;
 
-    toggle.addEventListener('click', () => setOpen(!open));
-    panel.querySelectorAll('[data-mobile-link]').forEach((link) => {
-      link.addEventListener('click', () => setOpen(false));
-    });
+      const setPopoverState = (open) => {
+        isPopoverOpen = open;
+        productsToggle.setAttribute('aria-expanded', String(open));
+        productsPopover.classList.toggle('is-open', open);
+      };
+
+      // Toggle on click
+      productsToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setPopoverState(!isPopoverOpen);
+      });
+
+      // Hover support with graceful exit delay for desktop
+      let hoverTimeout;
+      const enter = () => {
+        clearTimeout(hoverTimeout);
+        setPopoverState(true);
+      };
+      const leave = () => {
+        hoverTimeout = setTimeout(() => {
+          setPopoverState(false);
+        }, 220);
+      };
+
+      productsContainer.addEventListener('mouseenter', enter);
+      productsContainer.addEventListener('mouseleave', leave);
+
+      // Close on click outside
+      document.addEventListener('click', (e) => {
+        if (!productsContainer.contains(e.target)) {
+          setPopoverState(false);
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isPopoverOpen) {
+          setPopoverState(false);
+          productsToggle.focus();
+        }
+      });
+    }
+
+    // Mobile Drawer Interaction
+    if (panel && toggle && iconOpen && iconClose) {
+      let open = false;
+      const setOpen = (next) => {
+        open = next;
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+
+        if (open) {
+          panel.hidden = false;
+          requestAnimationFrame(() => panel.classList.add('is-open'));
+        } else {
+          panel.classList.remove('is-open');
+          window.setTimeout(() => {
+            if (!open) panel.hidden = true;
+          }, 250);
+        }
+      };
+
+      toggle.addEventListener('click', () => setOpen(!open));
+      panel.querySelectorAll('[data-mobile-link]').forEach((link) => {
+        link.addEventListener('click', () => setOpen(false));
+      });
+    }
   }
 
   initHeader();

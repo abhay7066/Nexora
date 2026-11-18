@@ -5,8 +5,9 @@
  */
 
 export const NAV_ITEMS = [
-  { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
+  { label: "About", to: "/about" },
+  { label: "Products", to: "/products" },
   { label: "Case Studies", to: "/case-studies" },
   // { label: "Work", to: "/portfolio" }, // commented out on the live site — kept as a redirect only
 ];
@@ -370,3 +371,135 @@ export const CASE_STUDIES = [
     ],
   },
 ];
+
+/**
+ * Proprietary software products and venture assets engineered, battle-tested,
+ * and operated by Nexora.
+ */
+export const PRODUCTS = [
+  {
+    slug: "nexconnect",
+    name: "nexConnect",
+    category: "Communication Infrastructure",
+    status: "Live in Production",
+    tagline: "Telecom-Grade Communication & CPaaS Infrastructure Platform",
+    shortDesc:
+      "A high-throughput CPaaS messaging engine delivering enterprise SMS dispatch with TRAI DLT compliance, Meta WhatsApp Cloud API automation, and distributed RabbitMQ asynchronous event queues.",
+    overview:
+      "nexConnect is Nexora's proprietary communication infrastructure platform. Built to handle mission-critical telecom-grade messaging at scale, it unifies Indian telecom DLT compliance (Principal Entity, Header, and Template registries), Meta WhatsApp Business Cloud APIs, and real-time wallet settlement into one developer-friendly REST platform.",
+    highlights: [
+      {
+        title: "Telecom DLT Compliance Engine",
+        desc: "End-to-end management of TRAI Principal Entity IDs, SMS Sender Headers, and Content Templates across Airtel, Jio, and Vodafone Idea.",
+        icon: "ShieldCheck",
+      },
+      {
+        title: "Meta WhatsApp Cloud API",
+        desc: "Automated template notification dispatch, interactive button schemas, dynamic parameter binding, and real-time webhook status tracking.",
+        icon: "Bot",
+      },
+      {
+        title: "Asynchronous RabbitMQ Routing",
+        desc: "High-concurrency message brokers, dead-letter exchanges, and worker pools ensuring zero dropped dispatches under spike traffic.",
+        icon: "Cpu",
+      },
+      {
+        title: "Multi-Tenant API Key Architecture",
+        desc: "Cryptographically secure SHA-256 HMAC API keys, role-based tenant isolation, automated credit ledgering, and instant refunds on delivery failure.",
+        icon: "KeyRound",
+      },
+    ],
+    stats: [
+      { value: "< 50ms", label: "Internal Dispatch Latency" },
+      { value: "100%", label: "TRAI DLT Regulatory Compliance" },
+      { value: "99.99%", label: "Queue Delivery Reliability" },
+      { value: "Multi-Tenant", label: "Tenant & Company Isolation" },
+    ],
+    techStack: [
+      "Java 21",
+      "Spring Boot",
+      "PostgreSQL 16",
+      "RabbitMQ",
+      "Meta Cloud API",
+      "Flyway",
+      "Docker",
+      "REST OpenAPI",
+    ],
+    badge: "Enterprise CPaaS Infrastructure",
+    image: "/images/products/nexconnect-icon.png",
+    externalUrl: "https://nexconnect.nexoratech.biz/",
+    primaryCta: {
+      label: "Launch nexConnect",
+      href: "https://nexconnect.nexoratech.biz/",
+      isExternal: true,
+    },
+    secondaryCta: {
+      label: "Request Enterprise Demo",
+      href: "/contact",
+      isExternal: false,
+    },
+    powersProduct: "Powers real-time WhatsApp booking confirmations and SMS alerts for Playcific.",
+  },
+  {
+    slug: "playcific",
+    name: "Playcific",
+    category: "Sports Venue & Slot Booking App",
+    status: "Live in Production",
+    tagline: "Your Game. Your People. Your Place.",
+    shortDesc:
+      "The premier sports facility discovery and turf booking platform in India. Browse 14-day live calendars, book cricket turfs and sports courts 24/7 without WhatsApp chaos, and get instant QR passes.",
+    overview:
+      "Playcific is an end-to-end consumer and venue management ecosystem incubated and engineered by Nexora. It replaces messy phone calls and manual paper booking with a frictionless mobile-first app for players, while equipping sports arena owners with a real-time revenue management dashboard and instant UPI settlements.",
+    highlights: [
+      {
+        title: "14-Day Real-Time Slot Engine",
+        desc: "Live visual booking calendar preventing double bookings across box cricket turfs, football grounds, badminton, padel, and pickleball arenas.",
+        icon: "CalendarCheck",
+      },
+      {
+        title: "WhatsApp QR Access Passes",
+        desc: "Instant contactless venue entry passes dispatched directly via WhatsApp (powered by nexConnect) for seamless gate check-in.",
+        icon: "QrCode",
+      },
+      {
+        title: "Playcific Owner App",
+        desc: "Dedicated mobile control center for facility owners to track daily payments, revenue analytics, and schedule maintenance lockouts.",
+        icon: "Smartphone",
+      },
+      {
+        title: "Player Reward & Coin Engine",
+        desc: "₹1-for-₹1 loyalty coins earned on every game, redeemable for instant checkout discounts, driving high player retention and repeat matches.",
+        icon: "Sparkles",
+      },
+    ],
+    stats: [
+      { value: "14-Day", label: "Live Visual Slot Calendar" },
+      { value: "0", label: "WhatsApp & Call Chaos" },
+      { value: "100%", label: "Contactless QR Check-ins" },
+      { value: "Instant", label: "UPI & Digital Settlements" },
+    ],
+    techStack: [
+      "Next.js",
+      "React 19",
+      "Tailwind CSS",
+      "Cloudflare",
+      "UPI Gateway",
+      "nexConnect API",
+    ],
+    badge: "Live Consumer & Venue Platform",
+    image: "/images/products/playcific-icon.webp",
+    externalUrl: "https://www.playcific.in/",
+    primaryCta: {
+      label: "Launch Playcific App",
+      href: "https://www.playcific.in/",
+      isExternal: true,
+    },
+    secondaryCta: {
+      label: "Consult On Sports Tech",
+      href: "/contact",
+      isExternal: false,
+    },
+    powersProduct: "Directly integrated with nexConnect for real-time automated WhatsApp ticket delivery.",
+  },
+];
+

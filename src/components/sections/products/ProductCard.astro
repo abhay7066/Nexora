@@ -1,0 +1,214 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  Cpu,
+  Layers,
+  Sparkles,
+  Bot,
+  ShieldCheck,
+  KeyRound,
+  CalendarCheck,
+  QrCode,
+  Smartphone,
+  Radio,
+} from "@lucide/astro";
+
+interface Highlight {
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+interface Props {
+  product: {
+    slug: string;
+    name: string;
+    category: string;
+    status: string;
+    tagline: string;
+    shortDesc: string;
+    overview: string;
+    highlights: Highlight[];
+    stats?: { value: string; label: string }[];
+    techStack: string[];
+    badge: string;
+    image?: string;
+    externalUrl?: string;
+    primaryCta: {
+      label: string;
+      href: string;
+      isExternal: boolean;
+    };
+    secondaryCta: {
+      label: string;
+      href: string;
+      isExternal: boolean;
+    };
+    powersProduct?: string;
+  };
+  index: number;
+}
+
+const { product, index } = Astro.props;
+
+// Map icon strings to Lucide components
+const iconMap: Record<string, any> = {
+  ShieldCheck,
+  Bot,
+  Cpu,
+  KeyRound,
+  CalendarCheck,
+  QrCode,
+  Smartphone,
+  Sparkles,
+};
+---
+
+<article
+  id={product.slug}
+  data-reveal
+  class="surface-card group relative flex flex-col justify-between overflow-hidden p-8 sm:p-10 lg:p-12 border border-border/70 hover:border-primary/50 transition-all duration-500 rounded-3xl"
+>
+  <!-- Ambient background glow & top highlight sweep -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-primary/10 blur-3xl opacity-50 group-hover:opacity-80 transition-opacity duration-700"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+  ></div>
+
+  <!-- Header: Category, Status Badge & Title -->
+  <div class="relative z-10">
+    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-border/50 pb-6">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="rounded-full bg-primary/10 border border-primary/25 px-3.5 py-1 text-xs font-mono font-semibold text-primary">
+          {product.category}
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-surface border border-border/70 px-3 py-1 text-xs font-mono text-muted-foreground">
+          <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          {product.status}
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs font-mono text-muted-foreground/80">
+        <span>PRODUCT 0{index + 1}</span>
+      </div>
+    </div>
+
+    <!-- Product Branding & Value Proposition -->
+    <div class="mt-8 flex flex-col gap-6">
+      <div class="flex items-center gap-4">
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={`${product.name} App Icon`}
+            width="56"
+            height="56"
+            class="size-14 rounded-2xl border border-border shadow-md object-cover shrink-0"
+            loading="lazy"
+          />
+        ) : (
+          <div class="grid size-14 place-items-center rounded-2xl bg-primary/10 text-primary border border-primary/25 shadow-md shrink-0">
+            <Radio class="size-7" />
+          </div>
+        )}
+        <div>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+            {product.name}
+          </h2>
+          <p class="text-sm sm:text-base font-medium text-primary mt-0.5">{product.tagline}</p>
+        </div>
+      </div>
+
+      <p class="max-w-4xl text-sm sm:text-base leading-relaxed text-muted-foreground">
+        {product.overview}
+      </p>
+    </div>
+
+    <!-- Bento Grid: Key Capabilities & Architecture Modules -->
+    <div class="mt-10">
+      <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4 font-semibold">
+        <Layers class="size-4 text-primary" />
+        <span>Core Architectural Capabilities</span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        {product.highlights.map((h) => {
+          const IconComponent = iconMap[h.icon] || Sparkles;
+          return (
+            <div class="surface-card flex flex-col gap-2.5 p-5 border border-border/50 hover:border-primary/40 rounded-xl transition-all duration-300">
+              <div class="flex items-center gap-2.5">
+                <div class="grid size-8 place-items-center rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0">
+                  <IconComponent class="size-4" />
+                </div>
+                <h3 class="font-display text-base font-semibold text-foreground tracking-tight">
+                  {h.title}
+                </h3>
+              </div>
+              <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed pl-0.5">{h.desc}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Tech Stack Strip -->
+    <div class="mt-8 pt-6 border-t border-border/50 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-mono text-muted-foreground mr-1 flex items-center gap-1.5 font-semibold">
+          <Cpu class="size-3.5 text-primary" />
+          Stack:
+        </span>
+        {product.techStack.map((tech) => (
+          <span class="rounded-md border border-border/60 bg-surface px-2.5 py-1 text-xs font-mono text-muted-foreground">
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {product.powersProduct && (
+        <div class="inline-flex items-center gap-2 rounded-full bg-primary/5 border border-primary/20 px-3.5 py-1 text-xs text-primary font-medium">
+          <Sparkles class="size-3.5 shrink-0" />
+          <span>{product.powersProduct}</span>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Footer Actions: Direct Live App link + Inquire / Blueprint link -->
+  <div class="relative z-10 mt-10 pt-6 border-t border-border/50 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-3">
+      <a
+        href={product.primaryCta.href}
+        target={product.primaryCta.isExternal ? "_blank" : undefined}
+        rel={product.primaryCta.isExternal ? "noopener noreferrer" : undefined}
+        class="hover-lift inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 shadow-sm"
+      >
+        <span>{product.primaryCta.label}</span>
+        {product.primaryCta.isExternal ? (
+          <ArrowUpRight class="size-4" />
+        ) : (
+          <ArrowRight class="size-4" />
+        )}
+      </a>
+
+      <a
+        href={product.secondaryCta.href}
+        class="hover-lift inline-flex h-11 items-center justify-center gap-1.5 rounded-full border border-border px-5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+      >
+        <span>{product.secondaryCta.label}</span>
+      </a>
+    </div>
+
+    {product.externalUrl && (
+      <div class="flex items-center gap-2 text-xs font-mono text-muted-foreground">
+        <span class="size-1.5 rounded-full bg-emerald-500"></span>
+        <span>{product.externalUrl.replace('https://', '').replace(/\/$/, '')}</span>
+      </div>
+    )}
+  </div>
+</article>

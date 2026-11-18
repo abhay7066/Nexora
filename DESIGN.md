@@ -147,12 +147,16 @@ All looping animation is suppressed and reveals resolve immediately under
 | Home sections (×12) | `src/components/sections/home/` | built |
 | About sections (×3) | `src/components/sections/about/` | built |
 | ContactForm | `src/components/sections/contact/ContactForm.astro` | built (placeholder submit) |
+| ProductCard | `src/components/sections/products/ProductCard.astro` | built |
+| EcosystemFlywheel | `src/components/sections/products/EcosystemFlywheel.astro` | built |
+| ProductsSpotlight | `src/components/sections/home/ProductsSpotlight.astro` | built |
 
 ## Pages
 
 | Route | Astro file | Status |
 |---|---|---|
 | `/` | `src/pages/index.astro` | built |
+| `/products` | `src/pages/products.astro` | built |
 | `/about/` | `src/pages/about.astro` | built |
 | `/services/` | `src/pages/services.astro` | built |
 | `/industries/` | `src/pages/industries.astro` | built |
